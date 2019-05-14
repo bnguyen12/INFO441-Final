@@ -7,6 +7,6 @@ urlpatterns = [
     # path('', views.home, name='home')
     path('adopt', views.adopt, name='adopt'),
     path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
-    path('cart', views.useCart, name='useCart'),
-    path('user/<int:user_id>/trees', views.userTrees, name='userTrees')
+    path('cart/<int:cart_id>', views.cartOperations, name='useCart'),
+    path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations')
 ]
