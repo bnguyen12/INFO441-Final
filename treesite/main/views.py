@@ -292,7 +292,7 @@ def inCartOperations(request, in_cart_id):
         tree_in_cart = in_cart_item.trees_id
         json_cart = {
             'id': in_cart_id,
-            'breed': tree_in_cart.trees_id.breed,
+            'breed': tree_in_cart.tree_type_id.breed,
             'age': tree_in_cart.age
         }
     
