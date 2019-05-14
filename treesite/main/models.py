@@ -30,6 +30,10 @@ class TreeAddress(models.Model):
     state = models.CharField(max_length=2)
     zip_code = models.IntegerField(default=98031)
 
+class UserTrees(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
+
 class Cart(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
