@@ -4,7 +4,7 @@ from .forms import RegistrationForm, SigninForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.views.decorators.csrf import csrf_exempt
-from .models import permissions
+from main.models import permissions
 
 # Create your views here.
 

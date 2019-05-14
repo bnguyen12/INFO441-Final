@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 from django.contrib.auth.models import User
 
 from .models import TreeType, Trees, TreeAddress, Cart, InCart, user_posts, permissions, UserTrees
-from .forms import PostForm, ProfileEdit
+from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
 
@@ -206,7 +206,7 @@ def adminDeleteUser(request, user_id):
             return HttpResponse("User unauthorized.", status=401)
     else:
         return HttpResponse("Method not allowed.", status=405)
-      
+
 def adopt(request):
     """Shows all trees for homepage"""
     if request.user.is_authenticated is False:
