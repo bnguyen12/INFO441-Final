@@ -147,7 +147,7 @@ def adminView(request):
                 for user in User.objects.all():
                     curr = {
                         "firstname": user.first_name, "lastname" : user.last_name,
-                        "emal" : user.email, "type" : user.perm_type, "userid": user.id
+                        "email" : user.email, "type" : user.perm_type, "userid": user.id
                     }
                     allUsers.append(curr)
                 for post in user_posts.objects.all():

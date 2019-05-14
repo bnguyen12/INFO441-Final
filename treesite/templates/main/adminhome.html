@@ -1,0 +1,33 @@
+<h1>Admin View</h1>
+<div id="container">
+    {% csrf_token %}
+    <h2>Users</h2>
+    <div class="list">
+        {% for user in users %}
+            <div class="userbox">
+                <p>{{user.firstname}} {{user.lastname}}</p>
+                <p>ID: {{user.id}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Permission: {{user.type}}</p>
+                <form>
+                    <button formaction="{% main/admindeleteuser/{{user.id}}  %}">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="list">
+        <h2>Posts</h2>
+        {% for post in posts %}
+            <div class="postbox">
+                <p>{{post.firstname}} {{post.lastname}}</p>
+                <p>ID: {{post.id}}</p>
+                <p>Name: {{post.treename}}</p>
+                <p>{{post.description}}</p>
+                <form>
+                    <button formaction="{% main/admindeletepost/{{post.id}}  %}">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div id="body">
+    {% csrf_token %}
+    <form>
+        <button formaction="{% main/profile/edit %}">Edit Details</button>
+    </form>
+    <div id="profile">
+        <div id="personalinfo">
+            <h3>{{ data.firstname }} {{ data.lastname}}</h3>
+            <p>{{ data.email}}</p>
+            <p>{{ data.usertype}}</p>
+        </div>
+        <div id="inventory">
+            {% for tree in data.treesowned %}
+                <div class="treebox">
+                    <h3>Type: {{tree.breed}}</h3>
+                    <p>Age: {{tree.age}}</p>
+                    <p>Status: {{tree.status}}</p>
+                    <p>{{tree.description}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

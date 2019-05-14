@@ -11,6 +11,6 @@ urlpatterns = [
     path('profile', views.userProfileView, name="userProfileView"),
     path('profile/edit', views.userProfileEdit, name="userProfileEdit"),
     path('adminview', views.adminView, name="adminView"),
-    path('admindeletepost', views.adminDeletePost, name="adminDeletePost"),
-    path('admindeleteuser', views.adminDeleteUser, name="adminDeleteUser")
+    path('admindeletepost/<int:post_id>', views.adminDeletePost, name="adminDeletePost"),
+    path('admindeleteuser/<int:user_id>', views.adminDeleteUser, name="adminDeleteUser")
 ]

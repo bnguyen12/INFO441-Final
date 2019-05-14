@@ -1,0 +1,17 @@
+<div id="body">
+    {% csrf_token %}
+    <form>
+        <button formaction="{% main/explore/makepost %}">Make A Post</button>
+    </form>
+    <div class="list">
+        {% for post in posts %}
+            <div class="postbox">
+                <h3>{{post.firstname}} {{post.lastname}} just bought {{post.treename}}!</h3>
+                <p>{{post.description}}</p>
+                <form>
+                    <button formaction="{% main/explore/{{post.id}}  %}">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
