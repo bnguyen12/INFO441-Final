@@ -225,7 +225,8 @@ def specificTree(request, trees_id):
     
     if request.method == 'GET':
         tree = Trees.objects.get(id=trees_id)
-        return render(request, 'main/specificTree.html', {'tree' : tree}, status=200)
+        location = TreeAddress.objects.get(trees_id=tree)
+        return render(request, 'main/specificTree.html', {'tree' : tree, 'location': location}, status=200)
     elif request.method == 'PATCH':
         # check if it's the seller
         tree = Trees.object.get(id=trees_id)
