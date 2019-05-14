@@ -1,0 +1,9 @@
+{% if trees %}
+    There is a total of {{ trees|length }} records:
+    <li>
+    {% for tree in trees %}
+        <ul>Breed: {{ tree.tree_type_id.breed }}</ul>
+        <ul>Description: {{ tree.tree_type_id.description }}</ul>
+        <ul>Age: {{ tree.age }}</ul>
+        <ul>Status: {{ tree.status }}</ul>
+    </li>

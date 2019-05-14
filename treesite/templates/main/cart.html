@@ -1,0 +1,7 @@
+{% if all_items %}
+    There is a total of {{ all_items|length }} trees in your cart:
+    <li>
+    {% for item in all_items %}
+        <ul>Breed: {{ item.trees_id.tree_type_id.breed }}</ul>
+        <ul>Description: {{ item.trees_id.tree_type_id.description }}</ul>
+    </li>
