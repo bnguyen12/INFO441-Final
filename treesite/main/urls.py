@@ -5,4 +5,8 @@ from . import views
 app_name = 'main'
 urlpatterns = [
     # path('', views.home, name='home')
+    path('adopt', views.adopt, name='adopt'),
+    path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
+    path('cart', views.useCart, name='useCart'),
+    path('user/<int:user_id>/trees', views.userTrees, name='userTrees')
 ]

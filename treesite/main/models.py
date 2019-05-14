@@ -8,32 +8,31 @@ class TreeType(models.Model):
 class Trees(models.Model):
     tree_type_id = models.ForeignKey(TreeType, on_delete=models.CASCADE)
     age = models.IntegerField()
-    
-    NORMAL = 'NRML'
-    SELLER = 'SLR'
-    ADMIN = 'ADMIN'
+    AVAILABLE = 'AVAILABLE'
+    SOLD = 'SOLD'
+    PENDING = 'PENDING'
     STATUS_CHOICES = (
-        (SELLER, 'Seller'),
-        (NORMAL, 'Normal'),
-        (ADMIN, 'Admin'),
+        (AVAILABLE, 'Available'),
+        (PENDING, 'Sold'),
+        (SOLD, 'Pending'),
     )
 
     status = models.CharField(
         max_length = 5,
         choices = STATUS_CHOICES,
-        default = NORMAL
+        default = AVAILABLE
     )
 
 class TreeAddress(models.Model):
     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
     street = models.CharField(max_length=250)
     city = models.CharField(max_length=32)
-    zip = models.IntegerField()
+    state = models.CharField(max_length=2)
+    zip_code = models.IntegerField(default=98031)
 
 class Cart(models.Model):
-    in_cart_id = models.ForeignKey('InCart', on_delete=models.CASCADE)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class InCart(models.Model):
-    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart_id = models.IntegerField()
     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
