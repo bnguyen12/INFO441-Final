@@ -1,7 +1,12 @@
 {% if all_items %}
     There is a total of {{ all_items|length }} trees in your cart:
-    <li>
+    <ul>
     {% for item in all_items %}
-        <ul>Breed: {{ item.trees_id.tree_type_id.breed }}</ul>
-        <ul>Description: {{ item.trees_id.tree_type_id.description }}</ul>
-    </li>
+        <li>Breed: {{ item.trees_id.tree_type_id.breed }}</li>
+        <li>Description: {{ item.trees_id.tree_type_id.description }}</li>
+        <br />
+    </ul>
+    {% endfor %}
+{% else %}
+    There is no items in cart
+{% endif %}
