@@ -12,5 +12,9 @@ urlpatterns = [
     path('profile/edit', views.userProfileEdit, name="userProfileEdit"),
     path('adminview', views.adminView, name="adminView"),
     path('admindeletepost/<int:post_id>', views.adminDeletePost, name="adminDeletePost"),
-    path('admindeleteuser/<int:user_id>', views.adminDeleteUser, name="adminDeleteUser")
+    path('admindeleteuser/<int:user_id>', views.adminDeleteUser, name="adminDeleteUser"),
+    path('adopt', views.adopt, name='adopt'),
+    path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
+    path('cart/<int:cart_id>', views.cartOperations, name='useCart'),
+    path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations')
 ]
