@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import urlencode
 from django.contrib.auth.models import User
 
-from .models import tree_type, trees, TreeAddress, Cart, InCart, user_posts, permissions, user_trees
+from .models import TreeType, Trees, TreeAddress, Cart, InCart, user_posts, permissions, UserTrees
 from .forms import PostForm, ProfileEdit
 import json
 import hashlib
@@ -85,9 +85,9 @@ def userProfileView(request):
         if request.user.is_authenticated:
             curr_user = User.objects.get(id=request.user.id)
             trees_owned = []
-            for tree in user_trees.objects.all().filter(user_id=request.user.id):
-                tree_obj = trees.objects.get(id=tree.trees_id)
-                tree_type_obj = tree_type.objects.get(id=tree_obj.tree_type_id)
+            for tree in UserTrees.objects.all().filter(user_id=request.user.id):
+                tree_obj = Trees.objects.get(id=tree.trees_id)
+                tree_type_obj = TreeType.objects.get(id=tree_obj.tree_type_id)
                 curr = {
                     "age" : tree_obj.age, "status" : tree_obj.status,
                     "breed" : tree_type_obj.breed, "description" : tree_type_obj.description
@@ -138,7 +138,7 @@ def userProfileEdit(request):
 def adminView(request):
     """VIEW 3"""
     """ADMIN view, GET request for admins to see all users and posts"""
-     if request.user.is_authenticated:
+    if request.user.is_authenticated:
         curr_user_permission = permissions.objects.get(user_id=request.user)
         if curr_user_permission.perm_type == "Admin":
             if request.method == "GET":
@@ -307,8 +307,8 @@ def inCartOperations(request, in_cart_id):
         in_cart_json = {
             'id': in_cart_id,
             'tree': {
-                'breed': tree.tree_type_id.breed,
-                'age': tree.age
+                'breed': new_tree.tree_type_id.breed,
+                'age': new_tree.age
             }
         }
 
