@@ -42,7 +42,7 @@ class InCart(models.Model):
     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
 
 
-class permissions(models.Model):
+class Permissions(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
 
     ADMIN = "Admin"
@@ -59,7 +59,7 @@ class permissions(models.Model):
         default = USER,
     )
 
-class user_posts(models.Model):
+class UserPosts(models.Model):
     tree_name = models.CharField(max_length=300, null=True)
     user_id = models.ForeignKey(User, null=True,  on_delete = models.CASCADE)
     description = models.CharField(max_length=1000)

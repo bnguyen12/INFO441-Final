@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import urlencode
 from django.contrib.auth.models import User
 
-from .models import TreeType, Trees, TreeAddress, Cart, InCart, user_posts, permissions, UserTrees
+from .models import TreeType, Trees, TreeAddress, Cart, InCart, UserPosts, Permissions, UserTrees
 from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
@@ -16,11 +16,11 @@ def exploreView(request):
     if request.method == "GET":
         if request.user.is_authenticated:
             allPosts = []
-            posts = user_posts.objects.all()
+            posts = UserPosts.objects.all()
             for post in posts:
                 description = post.description
                 user_obj = post.user_id
-                perm_type_obj = permissions.objects.get(user_id=request.user.id)
+                perm_type_obj = Permissions.objects.get(user_id=request.user.id)
                 tree_name = post.tree_name
                 curr = {
                     "firstname": user_obj.first_name, "lastname": user_obj.last_name,
@@ -39,10 +39,10 @@ def exploreDeletePost(request, post_id):
     """EXPLORE view, DELETE request to delete only your own posts"""
     if request.method == "DELETE":
         if request.user.is_authenticated:
-            post_obj = user_posts.objects.get(id=post_id)
+            post_obj = UserPosts.objects.get(id=post_id)
             user = post_obj.user_id
             if user.id == request.user.id:
-                user_posts.objects.filter(id=post_id).delete()
+                UserPosts.objects.filter(id=post_id).delete()
                 return HttpResponseRedirect("main/explore.html")
             else:
                 return HttpResponse("You are not authorized to delete another user's post.",
@@ -66,7 +66,7 @@ def exploreMakeAPost(request):
         if request.user.is_authenticated:
             form = PostForm(request.POST)
             if form.is_valid():
-                newPost = user_posts(user_id=request.user.id, 
+                newPost = UserPosts(user_id=request.user.id, 
                 tree_name=form.cleaned_data["tree_name"], 
                 description=form.cleaned_data["description"])
                 newPost.save()
@@ -103,7 +103,7 @@ def userProfileView(request):
             return HttpResponse("User unauthorized.", status=401)
     elif request.method == "DELETE":
         if request.user.is_authenticated:
-            curr_user_perm_obj = permissions.objects.get(user_id=request.user.id)
+            curr_user_perm_obj = Permissions.objects.get(user_id=request.user.id)
             
         else:
             return HttpResponse("User unauthorized.", status=401)
@@ -139,7 +139,7 @@ def adminView(request):
     """VIEW 3"""
     """ADMIN view, GET request for admins to see all users and posts"""
     if request.user.is_authenticated:
-        curr_user_permission = permissions.objects.get(user_id=request.user)
+        curr_user_permission = Permissions.objects.get(user_id=request.user)
         if curr_user_permission.perm_type == "Admin":
             if request.method == "GET":
                 allUsers = []
@@ -150,7 +150,7 @@ def adminView(request):
                         "email" : user.email, "type" : user.perm_type, "userid": user.id
                     }
                     allUsers.append(curr)
-                for post in user_posts.objects.all():
+                for post in UserPosts.objects.all():
                     description = post.description
                     user_obj = post.user_id
                     perm_type = user_obj.perm_type
@@ -175,11 +175,11 @@ def adminDeletePost(request, post_id):
     """ADMIN view, DELETE request for spam posts"""
     if request.method == "DELETE":
         if request.user.is_authenticated:
-            curr_user_permission = permissions.objects.get(user_id=request.user)
+            curr_user_permission = Permissions.objects.get(user_id=request.user)
             if curr_user_permission.perm_type == "Admin":
-                post_obj = user_posts.objects.get(id=post_id)
+                post_obj = UserPosts.objects.get(id=post_id)
                 user = post_obj.user_id
-                user_posts.objects.filter(id=post_id).delete()
+                UserPosts.objects.filter(id=post_id).delete()
                 return HttpResponseRedirect("main/adminhome.html")
             else:
                 return HttpResponse("You are not authorized to delete another user's post.",
@@ -194,7 +194,7 @@ def adminDeleteUser(request, user_id):
     """ADMIN view, DELETE request for users"""
     if request.method == "DELETE":
         if request.user.is_authenticated:
-            curr_user_permission = permissions.objects.get(user_id=request.user)
+            curr_user_permission = Permissions.objects.get(user_id=request.user)
             if curr_user_permission.perm_type == "Admin":
                 user_obj = User.objects.get(id=post_id)
                 user_obj.delete()
