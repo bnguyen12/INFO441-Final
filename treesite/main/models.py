@@ -18,7 +18,7 @@ class Trees(models.Model):
     )
 
     status = models.CharField(
-        max_length = 5,
+        max_length = 9,
         choices = STATUS_CHOICES,
         default = AVAILABLE
     )
@@ -54,7 +54,7 @@ class permissions(models.Model):
         (SELLER, "Seller")
     )
     perm_type = models.CharField(
-        max_length=5,
+        max_length=9,
         choices= PERMISSION_TYPES,
         default = USER,
     )
