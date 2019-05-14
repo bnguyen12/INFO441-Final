@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Permissions(models.Model):
-    user_id = models.ForeignKey('User', null=True)
+class permissions(models.Model):
+    user_id = models.ForeignKey(User, on_delete = models.CASCADE)
+
     ADMIN = "Admin"
     USER = "User"
     SELLER = "Seller"
@@ -18,3 +19,8 @@ class Permissions(models.Model):
         choices= PERMISSION_TYPES,
         default = USER,
     )
+
+class user_posts(models.Model):
+    tree_name = models.CharField(max_length=300, null=True)
+    user_id = models.ForeignKey(User, null=True,  on_delete = models.CASCADE)
+    description = models.CharField(max_length=1000)

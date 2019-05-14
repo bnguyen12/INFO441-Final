@@ -4,6 +4,7 @@ from .forms import RegistrationForm, SigninForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout, login
 from django.views.decorators.csrf import csrf_exempt
+from .models import permissions
 
 # Create your views here.
 
@@ -26,7 +27,12 @@ def register(request):
                     last_name = form.cleaned_data["last_name"],
                     perm_type = form.cleaned_data["perm_type"]
                 )
-                return HttpResponseRedirect("/auth/signin")
+                newPermissionObject = permissions(
+                    user_id=user,
+                    perm_type=form.cleaned_data["perm_type"]
+                )
+                newPermissionObject.save()
+                return HttpResponseRedirect("/")
             else:
                 return HttpResponse("Passwords did not match.", status=400)
         else:
@@ -65,4 +71,4 @@ def signout(request):
             logout(request)
             return HttpResponse("Sign out successful.", status=200)
     else:
-        return HttpResponse("Method not allowed on auth/signout.", status=405)
+        return HttpResponse("Method not allowed.", status=405)
