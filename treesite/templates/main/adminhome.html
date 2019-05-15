@@ -9,9 +9,9 @@
                 <p>ID: {{user.id}}</p>
                 <p>Email: {{user.email}}</p>
                 <p>Permission: {{user.type}}</p>
-                <form>
-                    <button formaction="/admindeleteuser/{{user.id}}">Delete</button>
-                </form>
+                {% comment %} <form formaction="/admindeleteuser/{{user.id}}" method=> {% endcomment %}
+                    <button formaction="/admindeleteuser/{{user.id}}" method="delete">Delete</button>
+                {% comment %} </form> {% endcomment %}
             </div>
         {% endfor %}
     </div>
@@ -25,7 +25,7 @@
                 <p>Name: {{post.treename}}</p>
                 <p>{{post.description}}</p>
                 <form>
-                    <button formaction="{/admindeletepost/{{post.id}}">Delete</button>
+                    <button formaction="/admindeletepost/{{post.id}}" method="delete">Delete</button>
                 </form>
             </div>
         {% endfor %}
