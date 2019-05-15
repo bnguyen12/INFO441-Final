@@ -140,21 +140,25 @@ def adminView(request):
     """VIEW 3"""
     """ADMIN view, GET request for admins to see all users and posts"""
     if request.user.is_authenticated:
-        curr_user_permission = Permissions.objects.get(user_id=request.user)
+        curr_user_permission = Permissions.objects.filter(user_id=request.user).first()
         if curr_user_permission.perm_type == "Admin":
             if request.method == "GET":
                 allUsers = []
                 allPosts = []
                 for user in User.objects.all():
+                    permission = Permissions.objects.filter(user_id=user).first()
                     curr = {
                         "firstname": user.first_name, "lastname" : user.last_name,
-                        "email" : user.email, "type" : user.perm_type, "userid": user.id
+                        "email" : user.email, "type" : permission.perm_type, "userid": user.id
                     }
                     allUsers.append(curr)
                 for post in UserPosts.objects.all():
+                    user = post.user_id
+                    permission = Permissions.objects.filter(user_id=user).first()
+
                     description = post.description
                     user_obj = post.user_id
-                    perm_type = user_obj.perm_type
+                    perm_type = permission.perm_type
                     tree_name = post.tree_name
                     curr = {
                         "firstname": user_obj.first_name, "lastname": user_obj.last_name,
