@@ -85,17 +85,18 @@ def userProfileView(request):
         if request.user.is_authenticated:
             curr_user = User.objects.get(id=request.user.id)
             trees_owned = []
-            for tree in UserTrees.objects.all().filter(user_id=request.user.id):
-                tree_obj = Trees.objects.get(id=tree.trees_id)
+            for tree in UserTrees.objects.all().filter(user_id=curr_user):
+                tree_obj = tree.trees_id
                 tree_type_obj = TreeType.objects.get(id=tree_obj.tree_type_id)
                 curr = {
                     "age" : tree_obj.age, "status" : tree_obj.status,
                     "breed" : tree_type_obj.breed, "description" : tree_type_obj.description
                 }
                 trees_owned.append(curr)
+            permission = Permissions.objects.filter(user_id=curr_user).first()
             data = {
                 "firstname": curr_user.first_name, "lastname" : curr_user.last_name,
-                "email" : curr_user.email, "usertype" : curr_user.perm_type,
+                "email" : curr_user.email, "usertype" : permission.perm_type,
                 "treesowned" : trees_owned
             }
             return render(request, "main/profile.html", {"data":data}, status=200)
