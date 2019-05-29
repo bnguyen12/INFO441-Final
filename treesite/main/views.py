@@ -46,8 +46,11 @@ def exploreView(request):
 def exploreDeletePost(request, post_id):
     """VIEW 1"""
     """EXPLORE view, DELETE request to delete only your own posts"""
-    if request.method == "DELETE":
+    print(request.method)
+    print(post_id)
+    if request.method == "GET":
         if request.user.is_authenticated:
+            print(request.user.id)
             post_obj = UserPosts.objects.get(id=post_id)
             user = post_obj.user_id
             if user.id == request.user.id:
