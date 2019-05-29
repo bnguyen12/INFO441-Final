@@ -55,7 +55,7 @@ def exploreDeletePost(request, post_id):
             user = post_obj.user_id
             if user.id == request.user.id:
                 UserPosts.objects.filter(id=post_id).delete()
-                return HttpResponseRedirect("main/explore.html")
+                return HttpResponseRedirect("/main/explore")
             else:
                 return HttpResponse("You are not authorized to delete another user's post.",
                 status=401)
