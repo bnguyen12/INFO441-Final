@@ -195,14 +195,14 @@ def adminView(request):
 def adminDeletePost(request, post_id):
     """VIEW 3"""
     """ADMIN view, DELETE request for spam posts"""
-    if request.method == "DELETE":
+    if request.method == "GET":
         if request.user.is_authenticated:
             curr_user_permission = Permissions.objects.get(user_id=request.user)
             if curr_user_permission.perm_type == "Admin":
                 post_obj = UserPosts.objects.get(id=post_id)
                 user = post_obj.user_id
                 UserPosts.objects.filter(id=post_id).delete()
-                return HttpResponseRedirect("main/adminhome.html")
+                return HttpResponseRedirect("/main/adminview")
             else:
                 return HttpResponse("You are not authorized to delete another user's post.",
                 status=401)
@@ -215,13 +215,13 @@ def adminDeletePost(request, post_id):
 def adminDeleteUser(request, user_id):
     """VIEW 3"""
     """ADMIN view, DELETE request for users"""
-    if request.method == "DELETE":
+    if request.method == "GET":
         if request.user.is_authenticated:
             curr_user_permission = Permissions.objects.get(user_id=request.user)
             if curr_user_permission.perm_type == "Admin":
                 user_obj = User.objects.get(id=post_id)
                 user_obj.delete()
-                return HttpResponseRedirect("main/adminhome.html")
+                return HttpResponseRedirect("/main/adminview")
             else:
                 return HttpResponse("You are not authorized to delete another user.",
                 status=401)
