@@ -17,7 +17,6 @@ def loadoptions(request):
     else:
             return HttpResponse("Method not allowed on /.", status=405)
 
-
 @csrf_exempt
 def exploreView(request): 
     """VIEW 1"""
@@ -43,6 +42,7 @@ def exploreView(request):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def exploreDeletePost(request, post_id):
     """VIEW 1"""
     """EXPLORE view, DELETE request to delete only your own posts"""
@@ -61,6 +61,7 @@ def exploreDeletePost(request, post_id):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def exploreMakeAPost(request):
     """VIEW 1"""
     """EXPLORE view, GET request to get a form to make a new post"""
@@ -75,18 +76,19 @@ def exploreMakeAPost(request):
         if request.user.is_authenticated:
             form = PostForm(request.POST)
             if form.is_valid():
-                newPost = UserPosts(user_id=request.user.id, 
+                newPost = UserPosts(user_id=request.user, 
                 tree_name=form.cleaned_data["tree_name"], 
                 description=form.cleaned_data["description"])
                 newPost.save()
-                return HttpResponseRedirect("main/explore.html")
+                return HttpResponseRedirect("/main/explore")
             else:
                 return HttpResponse("Invalid registration request.", status=400)
         else:
             return HttpResponse("User unauthorized.", status=401)
     else:
         return HttpResponse("Method not allowed.", status=405)
-        
+
+@csrf_exempt   
 def userProfileView(request):
     """VIEW 2"""
     """PROFILE view, GET request to get all of one's details onto a page"""
@@ -120,6 +122,7 @@ def userProfileView(request):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def userProfileEdit(request):
     """VIEW 2"""
     """PROFILE view, GET request to create a form to edit one's profile"""
@@ -145,6 +148,7 @@ def userProfileEdit(request):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def adminView(request):
     """VIEW 3"""
     """ADMIN view, GET request for admins to see all users and posts"""
@@ -184,6 +188,7 @@ def adminView(request):
     else:
         return HttpResponse("User unauthorized.", status=401)
 
+@csrf_exempt
 def adminDeletePost(request, post_id):
     """VIEW 3"""
     """ADMIN view, DELETE request for spam posts"""
@@ -203,6 +208,7 @@ def adminDeletePost(request, post_id):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def adminDeleteUser(request, user_id):
     """VIEW 3"""
     """ADMIN view, DELETE request for users"""
@@ -221,6 +227,7 @@ def adminDeleteUser(request, user_id):
     else:
         return HttpResponse("Method not allowed.", status=405)
 
+@csrf_exempt
 def adopt(request):
     """Shows all trees for homepage"""
     if request.user.is_authenticated is False:
@@ -232,6 +239,7 @@ def adopt(request):
             trees.append(tree)
         return render(request, 'main/trees.html', {'trees' : trees}, status=200)
 
+@csrf_exempt
 def specificTree(request, trees_id):
     """Shows, updates, or deletes a tree from the database"""
     if request.user.is_authenticated is False:
@@ -270,6 +278,7 @@ def specificTree(request, trees_id):
         tree.delete()
         return HttpResponse('Tree successfully deleted', status=200)
 
+@csrf_exempt
 def cartOperations(request, cart_id):
     """Shows, updates, or delete whole cart"""
     if request.user.is_authenticated is False:
@@ -296,6 +305,7 @@ def cartOperations(request, cart_id):
     else:
         return HttpResponse('Method not allowed.', status=405)
 
+@csrf_exempt
 def inCartOperations(request, in_cart_id):
     """Shows, updates, or deletes items in cart"""
     if request.user.is_authenticated is False:
