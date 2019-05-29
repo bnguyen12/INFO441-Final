@@ -6,7 +6,7 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(label="Email", max_length=30, required=True)
     password = forms.CharField(label="Password", widget=forms.PasswordInput, max_length=30, required=True)
     passwordconf = forms.CharField(label="PasswordConf", widget=forms.PasswordInput, max_length=30, required=True)
-
+    username = forms.CharField(label="Username", max_length=30, required=True)
     MY_CHOICES = (
         ('Admin', 'Admin'),
         ('User', 'User'),
@@ -16,7 +16,7 @@ class RegistrationForm(forms.Form):
     permission_type = forms.ChoiceField(widget=forms.RadioSelect, choices=MY_CHOICES, required=True)
 
 class SigninForm(forms.Form):
-    email = forms.EmailField(label="Email", max_length=30, required=True)
+    username = forms.CharField(label="Username", max_length=30, required=True)
     password = forms.CharField(label="Password", widget=forms.PasswordInput, max_length=30, required=True)
 
 class PostForm(forms.Form):

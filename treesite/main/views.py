@@ -9,6 +9,15 @@ from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
 
+
+@csrf_exempt
+def loadoptions(request):
+    if request.method == "GET":
+            return render(request, "main/index.html")
+    else:
+            return HttpResponse("Method not allowed on /.", status=405)
+
+
 @csrf_exempt
 def exploreView(request): 
     """VIEW 1"""

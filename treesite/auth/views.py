@@ -23,16 +23,18 @@ def register(request):
                 user = User.objects.create_user(
                     form.cleaned_data["email"],
                     form.cleaned_data["password"],
+                    form.cleaned_data["username"],
                     first_name = form.cleaned_data["first_name"],
                     last_name = form.cleaned_data["last_name"],
-                    perm_type = form.cleaned_data["perm_type"]
+                    # perm_type = form.cleaned_data["permission_type"]
                 )
-                newPermissionObject = permissions(
+                newPermissionObject = Permissions(
                     user_id=user,
-                    perm_type=form.cleaned_data["perm_type"]
+                    perm_type=form.cleaned_data["permission_type"]
                 )
+                print(user)
                 newPermissionObject.save()
-                return HttpResponseRedirect("/")
+                return HttpResponseRedirect("signin")
             else:
                 return HttpResponse("Passwords did not match.", status=400)
         else:
@@ -49,14 +51,17 @@ def signin(request):
     elif request.method == "POST":
         form = SigninForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data["email"]
+            username = form.cleaned_data["username"]
             pwd = form.cleaned_data["password"]
-            user = authenticate(username = email, password = pwd)
+            user = authenticate(username = username, password = pwd)
+            print(pwd )
+            print(username)
+            print(user)
             if user is None:
                 return HttpResponse("Invalid credentials.", status=401)
             else:
                 login(request, user)
-                return HttpResponseRedirect("/")
+                return HttpResponseRedirect("main/adopt")
         else:
             return HttpResponse("Bad login form.", status=400)
     else:
