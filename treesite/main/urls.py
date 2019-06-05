@@ -15,7 +15,7 @@ urlpatterns = [
     path('admindeleteuser/<int:user_id>', views.adminDeleteUser, name="adminDeleteUser"),
     path('adopt', views.adopt, name='adopt'),
     path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
-    path('cart/<int:cart_id>', views.cartOperations, name='useCart'),
+    path('cart', views.cartOperations, name='useCart'),
     path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations'),
     path('scrape', views.scrapeData, name='scrape')
 ]

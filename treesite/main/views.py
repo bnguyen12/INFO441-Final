@@ -281,29 +281,35 @@ def specificTree(request, trees_id):
         return HttpResponse('Tree successfully deleted', status=200)
 
 @csrf_exempt
-def cartOperations(request, cart_id):
+def cartOperations(request):
     """Shows, updates, or delete whole cart"""
     if request.user.is_authenticated is False:
         return HttpResponse('User unauthorized.', status=401)
-    
     if request.method == 'GET': # Displays all cart items on a webpage
-        cart_items = InCart.objects.filter(cart_id=cart_id)
+        cart = Cart.objects.filter(user_id=request.user).first()
         all_items = []
-        for item in cart_items:
-            all_items.append(item)
+        if cart: # if there's an existing cart
+            in_cart = InCart.objects.filter(cart_id=cart.id)
+            if in_cart: # if there's item in cart
+                for item in in_cart:
+                    all_items.append(item)
+        else: # make a cart for the user if not already made
+            Cart(user_id=request.user).save()
         return render(request, 'main/cart.html', { 'all_items' : all_items }, status=200)
     elif request.method == 'DELETE':
-        cart = Cart.objects.get(id=cart_id)
-        cart.delete()
-        return HttpResponse('Cart successfully emptied')
+        try:
+            Cart.objects.filter(user_id=request.user).first().delete
+        except Exception:
+            return HttpResponse('Database error', status=400)
+        return HttpResponse('Cart successfully emptied', status=200)
     elif request.method == 'POST': # Changes all items added to cart pending
-        cart = Cart.objects.get(id=cart_id)
-        in_cart_items = InCart.objects.filter(cart_id=cart)
-        for item in in_cart_items:
-            tree = in_cart_items.trees_id
-            tree.status = 'PENDING'
+        cart = Cart.objects.filter(user_id=request.user).first()
+        in_cart = InCart.objects.filter(cart_id=cart.id)
+        for item in in_cart:
+            tree = in_cart.trees_id
+            tree.status = 'SOLD'
             tree.save()
-        return HttpResponse('Successfully  cart', status=200)
+        return HttpResponse('Successfully checked out cart', status=200)
     else:
         return HttpResponse('Method not allowed.', status=405)
 

@@ -54,13 +54,7 @@ def signin(request):
             username = form.cleaned_data["username"]
             pwd = form.cleaned_data["password"]
             user = authenticate(username = username, password = pwd)
-            for user in User.objects.all():
-                print(user.username)
-            print(pwd )
-            print(username)
-            print(user)
             if user is None:
-                print(user)
                 return HttpResponse("Invalid credentials.", status=401)
             else:
                 login(request, user)
