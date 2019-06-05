@@ -3,12 +3,13 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from urllib.parse import urlencode
 from django.contrib.auth.models import User
+from bs4 import BeautifulSoup
 
 from .models import TreeType, Trees, TreeAddress, Cart, InCart, UserPosts, Permissions, UserTrees
 from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
-
+import requests
 
 @csrf_exempt
 def loadoptions(request):
@@ -355,3 +356,49 @@ def getJSON(request):
     except Exception: # any other error
         return HttpResponse('Bad request.', status=405)
     return data
+
+@csrf_exempt
+def scrapeData(request):
+    """Gets tree data from Wikipedia and puts it in TreeType, Trees, and TreeAddress"""
+    if request.method == 'GET':
+        if not TreeType.objects.filter(breed='Lost Tree').first(): # check if we've scraped before
+            page_link = 'https://en.wikipedia.org/wiki/List_of_individual_trees'
+            page_response = requests.get(page_link, timeout=10)
+            page_content = BeautifulSoup(page_response.content, 'html.parser')
+
+            tree_names = {}
+            all_tables = page_content.findChildren('table', attrs={'class':'wikitable'})
+            for table in all_tables:
+                rows = table.findChildren(['tr'])
+                for row in rows:
+                    cells = row.find_all('td')
+                    if len(cells) == 5:
+                        name = cells[0].text.strip()
+                        description = cells[4].text.strip().split('[')[0] # gets rid of citation at end of string
+                        location = cells[2].text
+
+                        try:
+                            age = int(cells[3].text)
+                        except:
+                            age = 5 # if there isn't a default age found
+                
+                        if len(location) == 0:
+                            location = "USA" # default value to USA is valid one isn't found
+                        if len(description) == 0:
+                            description = "No description available."
+                        if len(name) > 0:
+                            tree_names[name] = { 'description': description, 'age': age, 'location': location }
+
+            for name in tree_names:
+                desc = tree_names[name]['description']
+                location = tree_names[name]['location']
+                age = tree_names[name]['age']
+                # new_tree_type = TreeType(breed=name, description=desc)
+                # new_tree_type.save()
+
+            return HttpResponseRedirect("/main/adopt")
+        else:
+            # Goes back to main page
+            return HttpResponseRedirect("/main/adopt")
+    else:
+        return HttpResponse('Method not allowed.', status=405)

@@ -16,5 +16,6 @@ urlpatterns = [
     path('adopt', views.adopt, name='adopt'),
     path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
     path('cart/<int:cart_id>', views.cartOperations, name='useCart'),
-    path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations')
+    path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations'),
+    path('scrape', views.scrapeData, name='scrape')
 ]

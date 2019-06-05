@@ -1,20 +1,45 @@
-<a href="/explore">Explore</a>
-<a href="/adminview">Admin View</a>
-<a href="/profile">Profile</a>
-<a href="/adopt">Adopt</a>
-<a href="/cart/1">Cart</a>
-</br >
-{% if trees %}
-    There is a total of {{ trees|length }} records:
-    <ul>
-    {% for tree in trees %}
-        <li>Breed: {{ tree.tree_type_id.breed }}</li>
-        <li>Description: {{ tree.tree_type_id.description }}</li>
-        <li>Age: {{ tree.age }}</li>
-        <li>Status: {{ tree.status }}</li>
-        <br />
-    {% endfor %}
-    </ul>
-{% else %}
-    There are no trees to look at
-{% endif %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Adopt-A-Tree</title>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'styles.css' %}"
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="/explore">Explore</a></li>
+                    <li><a href="/adminview">Admin View</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/adopt">Adopt</a></li>
+                    <li><a href="/cart/1">Cart</a></li>
+                    <li><a href="/scrape">Scrape</a></li>
+                </ul>
+            </div>
+            <div id="content">
+                {% if trees %}
+                    There is a total of {{ trees|length }} records:
+                    <ul>
+                    {% for tree in trees %}
+                        <li>Breed: {{ tree.tree_type_id.breed }}</li>
+                        <li>Description: {{ tree.tree_type_id.description }}</li>
+                        <li>Age: {{ tree.age }}</li>
+                        <li>Status: {{ tree.status }}</li>
+                        <br />
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    There are no trees to look at
+                {% endif %}
+            </div>
+        </nav>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

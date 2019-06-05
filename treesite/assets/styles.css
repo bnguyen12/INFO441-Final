@@ -33,3 +33,7 @@ header {
 .btn-large:hover {
     background-color: #304214;
 }
+
+#content {
+    background-color: black;
+}
