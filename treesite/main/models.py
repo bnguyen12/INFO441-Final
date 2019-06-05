@@ -24,13 +24,6 @@ class Trees(models.Model):
         default = AVAILABLE
     )
 
-# class TreeAddress(models.Model):
-#     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
-#     street = models.CharField(max_length=250)
-#     city = models.CharField(max_length=32)
-#     state = models.CharField(max_length=2)
-#     zip_code = models.IntegerField(default=98031)
-
 class UserTrees(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)

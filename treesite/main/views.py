@@ -391,8 +391,19 @@ def scrapeData(request):
                 desc = tree_names[name]['description']
                 location = tree_names[name]['location']
                 age = tree_names[name]['age']
-                # new_tree_type = TreeType(breed=name, description=desc)
-                # new_tree_type.save()
+                try:
+                    new_tree_type = TreeType(breed=name, description=desc)
+                    new_tree_type.save()
+                    new_tree = Trees(
+                        tree_type_id=new_tree_type,
+                        age=age,
+                        location=location,
+                        status='AVAILABLE'
+                    )
+                    print(new_tree)
+                    new_tree.save()
+                except Exception:
+                    return HttpResponse('Database error', status=400)
 
             return HttpResponseRedirect("/main/adopt")
         else:
