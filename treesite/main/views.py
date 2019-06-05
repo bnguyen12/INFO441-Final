@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 
-from .models import TreeType, Trees, TreeAddress, Cart, InCart, UserPosts, Permissions, UserTrees
+from .models import TreeType, Trees, Cart, InCart, UserPosts, Permissions, UserTrees
 from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
@@ -47,8 +47,6 @@ def exploreView(request):
 def exploreDeletePost(request, post_id):
     """VIEW 1"""
     """EXPLORE view, DELETE request to delete only your own posts"""
-    print(request.method)
-    print(post_id)
     if request.method == "GET":
         if request.user.is_authenticated:
             print(request.user.id)
@@ -251,7 +249,7 @@ def specificTree(request, trees_id):
     
     if request.method == 'GET':
         tree = Trees.objects.get(id=trees_id)
-        location = TreeAddress.objects.get(trees_id=tree)
+        location = tree.location # TreeAddress.objects.get(trees_id=tree)
         return render(request, 'main/specificTree.html', {'tree' : tree, 'location': location}, status=200)
     elif request.method == 'PATCH':
         # check if it's the seller
@@ -359,7 +357,7 @@ def getJSON(request):
 
 @csrf_exempt
 def scrapeData(request):
-    """Gets tree data from Wikipedia and puts it in TreeType, Trees, and TreeAddress"""
+    """Gets tree data from Wikipedia and puts it in TreeType and Trees"""
     if request.method == 'GET':
         if not TreeType.objects.filter(breed='Lost Tree').first(): # check if we've scraped before
             page_link = 'https://en.wikipedia.org/wiki/List_of_individual_trees'

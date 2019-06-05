@@ -8,6 +8,7 @@ class TreeType(models.Model):
 class Trees(models.Model):
     tree_type_id = models.ForeignKey(TreeType, on_delete=models.CASCADE)
     age = models.IntegerField()
+    location = models.CharField(max_length=250)
     AVAILABLE = 'AVAILABLE'
     SOLD = 'SOLD'
     PENDING = 'PENDING'
@@ -23,12 +24,12 @@ class Trees(models.Model):
         default = AVAILABLE
     )
 
-class TreeAddress(models.Model):
-    trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
-    street = models.CharField(max_length=250)
-    city = models.CharField(max_length=32)
-    state = models.CharField(max_length=2)
-    zip_code = models.IntegerField(default=98031)
+# class TreeAddress(models.Model):
+#     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
+#     street = models.CharField(max_length=250)
+#     city = models.CharField(max_length=32)
+#     state = models.CharField(max_length=2)
+#     zip_code = models.IntegerField(default=98031)
 
 class UserTrees(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
