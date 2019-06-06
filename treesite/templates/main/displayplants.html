@@ -24,36 +24,27 @@
                 <li><a href="/cart">Cart</a></li>
                 <li><a href="/scrape">Load Trees (optional)</a></li>
                 <li><a href="/auth/signout">Sign Out</a></li>
-                <li><a href="/main/displayplants">USDA Plants</a></li>
+                <li class="active"><a href="/main/displayplants">USDA Plants</a></li>
             </ul>
         </div>
         <div id="content">
-            {% if trees %}
-                <p>{{ trees|length }} trees are looking to get adopted :)</p>
+            {% if plant_names %}
+                <p>
+                    Trees makeup a good portion of the total plants in our world! Here's {{ plant_names|length }} 
+                    plants compiled from the USDA API.
+                </p>
                 <ul class="contentul">
-                {% for tree in trees %}
-                    {% if tree.status == 'AVAILABLE' %}
-                        <li class="onetree">
-                            <div class="imgtreediv">
-                                <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
-                            </div>
-                            <ul class="singletreedetails">
-                                <li>Breed: <p>{{ tree.tree_type_id.breed }}</p> </li>
-                                <!-- <li>Description: <p> {{ tree.tree_type_id.description }}</p> </li> -->
-                                <li>Age: <p>{{ tree.age }}</p> </li>
-                                <li>Status: <p>{{ tree.status }}</p></li>
-                                <form action="/adopt/{{tree.id}}" method="get">
-                                    {% csrf_token %}
-                                    <input type="submit" class="btn-large" value="Details">
-                                </form>
-                                <br />
-                            </ul>
-                        </li>
-                    {% endif %}
+                {% for plant in plant_names %}
+                    <li class="onetree">
+                        <div class="imgtreediv">
+                            <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
+                        </div>
+                        <p>{{plant}}</p>
+                    </li>
                 {% endfor %}
                 </ul>
             {% else %}
-                There are no trees to look at
+                Plants couldn't be loaded.
             {% endif %}
         </div>
         <!-- Compiled and minified JavaScript -->

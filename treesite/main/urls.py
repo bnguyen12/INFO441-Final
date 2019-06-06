@@ -20,5 +20,6 @@ urlpatterns = [
     path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations'),
     path('scrape', views.scrapeData, name='scrape'),
     path('contactus', TemplateView.as_view(template_name='main/contactus.html'), name='contactus'),
-    path('aboutus', TemplateView.as_view(template_name='main/aboutus.html'), name='aboutus')
+    path('aboutus', TemplateView.as_view(template_name='main/aboutus.html'), name='aboutus'),
+    path('displayplants', views.displayPlantAPI, name='displayplants')
 ]
