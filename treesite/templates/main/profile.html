@@ -1,23 +1,50 @@
+{% load static from staticfiles %}
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<div class="navbar">
+    <ul id="nav-mobile">
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/adminview">Admin View</a></li>
+        <li><a href="/profile">My Garden</a></li>
+        <li><a href="/adopt">Adopt</a></li>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/scrape">Load Trees (optional)</a></li>
+        <li><a href="/auth/signout">Sign Out</a></li>
+    </ul>
+</div>
 <div id="body">
     {% csrf_token %}
-    <form>
-        <button formaction="/profile/edit">Edit Details</button>
-    </form>
     <div id="profile">
         <div id="personalinfo">
-            <h3>{{ data.firstname }} {{ data.lastname}}</h3>
-            <p>{{ data.email}}</p>
-            <p>{{ data.usertype}}</p>
+            <h3>{{ data.firstname }} {{ data.lastname}}'s Garden</h3>
+            <div class="info"><p class="field"> Email: </p><p class="response"> {{ data.email}} </p></div>
+            <div class="info"><p class="field">Permission Type:</p><p class="response"> {{ data.usertype}}</p></div>
         </div>
+        <form>
+            <button formaction="/profile/edit" class="btn-large">Edit Details</button>
+        </form>
         <div id="inventory">
+            <p class="inventoryhead">{{data.firstname}}'s Inventory</p>
+            <div id="alltrees">
             {% for tree in data.treesowned %}
                 <div class="treebox">
-                    <h3>Type: {{tree.breed}}</h3>
-                    <p>Age: {{tree.age}}</p>
-                    <p>Status: {{tree.status}}</p>
-                    <p>{{tree.description}}</p>
+                    <div class="imgtreediv">
+                        <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
+                    </div>
+                    <div><p class="field">Type: </p><p class="response">{{tree.breed}}</p></div>
+                    <div><p class="field">Age: </p><p class="response">{{tree.age}}</p></div>
+                    <div><p class="field">Status: </p><p class="response">{{tree.status}}</p></div>
+                    <div><p class="field">Description: </p><p class="response">{{tree.description}}</p></div>
                 </div>
             {% endfor %}
+            </div>
         </div>
     </div>
 </div>

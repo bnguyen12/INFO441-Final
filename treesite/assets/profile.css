@@ -1,0 +1,144 @@
+.nav-wrapper {
+    background-color: #98B768;
+    color: white;
+    margin: auto;
+    padding: 0;
+}
+
+.nav-wrapper a {
+    color: white;
+    font-size: 3rem;
+}
+
+.navbar {
+    align-content: center;
+    margin: auto;
+    padding: 0;
+    padding-bottom: 2rem;
+}
+
+.navbar ul a {
+    color: #98B768;
+    font-size: 1.5rem;
+}
+
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 0;
+    align-content: center;
+    text-align: center;
+    align-items: center
+
+}
+
+.navbar ul li {
+    text-align: center;
+    padding: 1rem;
+    align-content: center;
+    align-self: center;
+    margin: auto;
+}
+
+.navbar ul a:hover {
+    text-shadow: 0px 5px 10px; 
+}
+
+nav {
+    background-color: #98B768;
+}
+
+.btn-large {
+    background-color: #98B768;
+    font-size: 1rem;
+    text-align: center;
+    height: 2rem;
+    width: 10rem;
+    margin: auto;
+    padding: 0;
+    vertical-align: middle;
+    line-height: 6px;
+    align-content: center;
+    align-self: center;
+    display: block;
+}
+
+.btn-large:hover {
+    background-color: #304214;
+}
+
+.inventoryhead {
+    margin: 0;
+    color: #304214;
+    font-size: 2rem;
+    text-align: center;
+}
+
+#personalinfo {
+    text-align: center;
+}
+
+#inventory {
+    text-align: center;
+    color: #304214;
+    font-size: 1rem;
+    padding-top: 2rem;
+}
+
+.info {
+    margin: 1rem;
+}
+
+#personalinfo p {
+    display: inline;
+}
+
+.field {
+    color: #304214;
+    font-weight: bold;
+}
+
+.response {
+    color: rgb(127, 155, 85);
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 3rem;
+    margin: 0;
+}
+
+.treebox {
+    text-align: center;
+    margin: 1rem;
+}
+
+.treebox p {
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+
+#alltrees {
+    margin: auto;
+    align-content: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.treebox {
+    background-color: rgba(151, 183, 104, 0.206);
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 3rem;
+}
+
+.imgtree {
+    width: 40%;
+}

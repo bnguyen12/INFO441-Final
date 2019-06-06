@@ -50,54 +50,6 @@ nav {
     background-color: #98B768;
 }
 
-h1 {
-    color: #98B768;
-    text-align: center;
-    font-size: 2rem;
-}
-
-.alldetails {
-    display: flex;
-    flex-direction: row;
-}
-
-.alldetails li {
-    /* display: flex;
-    flex-direction: row; */
-    text-align: center;
-    align-items: center;
-}
-
-.alldata {
-    width: 80%;
-    text-align: center;
-}
-
-.alldata li {
-    font-weight: bold;
-    color: rgb(101, 121, 72);
-    text-align: center;
-    padding-bottom: 1rem;
-}
-
-.alldata li p {
-    font-weight: normal;
-    color: #98B768;
-    margin: 0;
-    margin-left: 1rem;
-    text-align: center;
-}
-
-.imgtreediv {
-    align-content: center; 
-    width: 45%;
-}
-
-.imgtree {
-    align-self: center;
-    width: 100%;
-}
-
 .btn-large {
     background-color: #98B768;
     font-size: 1rem;
@@ -106,7 +58,6 @@ h1 {
     width: 10rem;
     margin: auto;
     padding: 0;
-    vertical-align: middle;
     line-height: 6px;
     align-content: center;
     align-self: center;
@@ -117,9 +68,52 @@ h1 {
     background-color: #304214;
 }
 
-form {
-    align-content: center;
-    align-self: center;
+h1 {
+    color: #304214;
+    text-align: center;
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 3rem;
+}
+
+div {
+    padding-top: 4rem;
+    width: 80%;
+    text-align: center;
     margin: auto;
 }
 
+.btn-large:hover {
+    background-color: #304214;
+}
+
+
+li label {
+    width: 100%;
+    display: inline;
+}
+
+li {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    align-self: center;
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    display: block;
+}
+
+[type="radio"] {
+    margin: 2rem;
+    padding: 0;
+}
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: absolute;
+    opacity: 1; 
+    pointer-events: none;
+}

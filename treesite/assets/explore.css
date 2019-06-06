@@ -17,6 +17,7 @@
     padding-bottom: 2rem;
 }
 
+
 .navbar ul a {
     color: #98B768;
     font-size: 1.5rem;
@@ -56,46 +57,22 @@ h1 {
     font-size: 2rem;
 }
 
-.alldetails {
+#content > p {
+    text-align: center;
+    color: #304214;
+    font-size: 1.5rem;
+}
+
+.contentul {
+    padding-top: 1rem;
+    width: 90%;
+    text-align: center;
+    margin: auto;
     display: flex;
     flex-direction: row;
-}
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-.alldetails li {
-    /* display: flex;
-    flex-direction: row; */
-    text-align: center;
-    align-items: center;
-}
-
-.alldata {
-    width: 80%;
-    text-align: center;
-}
-
-.alldata li {
-    font-weight: bold;
-    color: rgb(101, 121, 72);
-    text-align: center;
-    padding-bottom: 1rem;
-}
-
-.alldata li p {
-    font-weight: normal;
-    color: #98B768;
-    margin: 0;
-    margin-left: 1rem;
-    text-align: center;
-}
-
-.imgtreediv {
-    align-content: center; 
-    width: 45%;
-}
-
-.imgtree {
-    align-self: center;
-    width: 100%;
 }
 
 .btn-large {
@@ -117,9 +94,30 @@ h1 {
     background-color: #304214;
 }
 
-form {
-    align-content: center;
-    align-self: center;
-    margin: auto;
+.onetree {
+    background-color: rgba(151, 183, 104, 0.308);
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 3rem;
+}
+
+.singletreedetails {
+    padding-top: 1rem;
+}
+
+.singletreedetails li {
+    font-weight: bold;
+    display: inline;
+}
+
+.singletreedetails li p {
+    font-weight: normal;
+    padding-bottom: 1rem;
+    margin: 0px;
+}
+
+.imgtree {
+    width: 40%;
 }
 

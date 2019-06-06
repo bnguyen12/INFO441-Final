@@ -1,5 +1,27 @@
+{% load static from staticfiles %}
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'editprofile.css' %}">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<div class="navbar">
+    <ul id="nav-mobile">
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/adminview">Admin View</a></li>
+        <li><a href="/profile">My Garden</a></li>
+        <li><a href="/adopt">Adopt</a></li>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/scrape">Load Trees (optional)</a></li>
+        <li><a href="/auth/signout">Sign Out</a></li>
+    </ul>
+</div>
+<h1>Edit Profile</h1>
 <form action="/main/profile/edit" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="submit">
+    <input type="submit" class="btn-large" value="submit">
 </form>

@@ -1,5 +1,17 @@
+
+{% load static from staticfiles %}
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'makeapost.css' %}">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<h3>Make A New Post</h3>
 <form action="/main/explore/makeapost" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="submit">
+    <input type="submit" class="btn-large" value="submit">
 </form>

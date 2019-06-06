@@ -7,41 +7,47 @@
 
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="{% static 'styles.css' %}"
+        <link rel="stylesheet" href="{% static 'cart.css' %}">
     </head>
     <body>
         <nav>
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="/explore">Explore</a></li>
-                    <li><a href="/adminview">Admin View</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/adopt">Adopt</a></li>
-                    <li class="active"><a href="/cart">Cart</a></li>
-                    <li><a href="/scrape">Load Trees (optional)</a></li>
-                    <li><a href="/auth/signout">Sign Out</a></li>
-                </ul>
-            </div>
-            <div id="content">
-                {% if all_items %}
-                    <form action="/main/cart" method="post">
-                        {% csrf_token %}
-                        <input type="submit" value="Checkout">
-                    </form>
-                    There is a total of {{ all_items|length }} trees in your cart:
-                    <ul>
-                    {% for item in all_items %}
-                        <li>Breed: {{ item.trees_id.tree_type_id.breed }}</li>
-                        <li>Description: {{ item.trees_id.tree_type_id.description }}</li>
-                        <br />
-                    </ul>
-                    {% endfor %}
-                {% else %}
-                    There is no items in cart
-                {% endif %}
             </div>
         </nav>
+        <div class="navbar">
+            <ul id="nav-mobile">
+                <li><a href="/explore">Explore</a></li>
+                <li><a href="/adminview">Admin View</a></li>
+                <li><a href="/profile">My Garden</a></li>
+                <li><a href="/adopt">Adopt</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/scrape">Load Trees (optional)</a></li>
+                <li><a href="/auth/signout">Sign Out</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            {% if all_items %}
+                There is a total of {{ all_items|length }} trees in your cart:
+                <ul>
+                {% for item in all_items %}
+                    <li>
+                        <ul>
+                            <li>Breed: {{ item.trees_id.tree_type_id.breed }}</li>
+                            <li>Description: {{ item.trees_id.tree_type_id.description }}</li>
+                        </ul>
+                    </li>
+                    <br />
+                {% endfor %}
+                </ul>
+                <form action="/main/cart" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="btn-large" value="Checkout">
+                </form>
+            {% else %}
+                There are no items in cart
+            {% endif %}
+        </div>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>

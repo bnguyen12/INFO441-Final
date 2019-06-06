@@ -13,7 +13,7 @@
     <ul id="nav-mobile">
         <li><a href="/explore">Explore</a></li>
         <li><a href="/adminview">Admin View</a></li>
-        <li><a href="/profile">Profile</a></li>
+        <li><a href="/profile">My Garden</a></li>
         <li><a href="/adopt">Adopt</a></li>
         <li><a href="/cart">Cart</a></li>
         <li><a href="/scrape">Load Trees (optional)</a></li>
@@ -21,17 +21,26 @@
     </ul>
 </div>
 {% if tree and location %}
-    <h1>Breed: {{ tree.tree_type_id.breed }}</h1>
-    <ul>
-        <li>Description: {{ tree.tree_type_id.description }}</li>
-        <li>Age: {{ tree.age }}</li>
-        <li>Status: {{ tree.status }}</li>
-        <li>Location: {{location}}</li>
+    <div>
+        <div class="alldetails">
+            <div class="imgtreediv">
+                <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
+            </div>
+            <div class="alldata">
+                <ul>
+                    <li>Breed: <p>{{ tree.tree_type_id.breed }} </p> </li>
+                    <li>Description: <p>{{ tree.tree_type_id.description }}</p></li>
+                    <li>Age: <p>{{ tree.age }}</p></li>
+                    <li>Status: <p>{{ tree.status }}</p></li>
+                    <li>Location: <p>{{location}}</p></li>
+                </ul>
+            </div>
+        </div>
         <form action="/adopt/{{tree.id}}" method="post">
             {% csrf_token %}
             <input type="submit" class="btn-large" value="Add to Cart">
         </form>
-    </ul>
+    </div>
 {% else %}
     No tree on this page
 {% endif %}
