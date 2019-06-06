@@ -381,12 +381,14 @@ def getJSON(request):
 @csrf_exempt
 def scrapeData(request):
     """Gets tree data from Wikipedia and puts it in TreeType and Trees"""
+    if request.user.is_authenticated is False:
+        return HttpResponse('User unauthorized.', status=401)
+    
     if request.method == 'GET':
         if not TreeType.objects.filter(breed='Lost Tree').first(): # check if we've scraped before
             page_link = 'https://en.wikipedia.org/wiki/List_of_individual_trees'
             page_response = requests.get(page_link, timeout=10)
             page_content = BeautifulSoup(page_response.content, 'html.parser')
-
             tree_names = {}
             all_tables = page_content.findChildren('table', attrs={'class':'wikitable'})
             for table in all_tables:
@@ -434,3 +436,44 @@ def scrapeData(request):
             return HttpResponseRedirect("/main/adopt")
     else:
         return HttpResponse('Method not allowed.', status=405)
+
+@csrf_exempt
+def showTreeData(request):
+    """Publicly available API endpoint"""
+    if request.method == 'GET':
+        page_link = 'https://en.wikipedia.org/wiki/List_of_individual_trees'
+        page_response = requests.get(page_link, timeout=10)
+        page_content = BeautifulSoup(page_response.content, 'html.parser')
+
+        tree_names = {}
+        all_tables = page_content.findChildren('table', attrs={'class':'wikitable'})
+        for table in all_tables:
+            rows = table.findChildren(['tr'])
+            for row in rows:
+                cells = row.find_all('td')
+                if len(cells) == 5:
+                    name = cells[0].text.strip()
+                    description = cells[4].text.strip().split('[')[0] # gets rid of citation at end of string
+                    location = cells[2].text
+                    try:
+                        age = int(cells[3].text)
+                    except:
+                        age = 0
+                    if len(name) > 0:
+                        tree_names[name] = { 'description': description, 'age': age, 'location': location }
+        json_trees = []
+        for name in tree_names:
+            desc = tree_names[name]['description']
+            location = tree_names[name]['location']
+            age = tree_names[name]['age']
+            try:
+                json_trees.append({
+                    'name': name,
+                    'description': desc,
+                    'location': location,
+                    'age': age
+                })
+                
+            except Exception:
+                return HttpResponse('Parsing error', status=400)
+        return JsonResponse(json_trees, safe=False, status=201)
