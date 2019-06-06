@@ -118,3 +118,6 @@ h1 {
     width: 40%;
 }
 
+footer {
+    position: fixed;
+}
