@@ -21,9 +21,9 @@ def register(request):
             pwdconf = form.cleaned_data['passwordconf']
             if pwd == pwdconf:
                 user = User.objects.create_user(
-                    form.cleaned_data["username"],
-                    form.cleaned_data["password"],
-                    form.cleaned_data["email"],
+                    username=form.cleaned_data["username"],
+                    password=form.cleaned_data["password"],
+                    email=form.cleaned_data["email"],
                     first_name = form.cleaned_data["first_name"],
                     last_name = form.cleaned_data["last_name"],
                     # perm_type = form.cleaned_data["permission_type"]
@@ -33,6 +33,7 @@ def register(request):
                     perm_type=form.cleaned_data["permission_type"]
                 )
                 print(user)
+                print(user.password)
                 newPermissionObject.save()
                 return HttpResponseRedirect("signin")
             else:
@@ -53,7 +54,10 @@ def signin(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             pwd = form.cleaned_data["password"]
+            print(pwd)
+            print(username)
             user = authenticate(username = username, password = pwd)
+            print(user)
             if user is None:
                 return HttpResponse("Invalid credentials.", status=401)
             else:
