@@ -1,5 +1,17 @@
-<form action="/auth/register" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="submit">
-</form>
+{% load static from staticfiles %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'register.css' %}">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<h1> Register </h1>
+<div id="registerbox">
+    <form action="/auth/register" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="submit" class="btn-large">
+    </form>
+</div>

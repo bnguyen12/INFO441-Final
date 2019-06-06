@@ -1,9 +1,11 @@
 .nav-wrapper {
     background-color: #98B768;
+    color: white;
 }
 
-html {
-    background-color: rgb(240, 250, 224);
+.nav-wrapper a {
+    color: white;
+    font-size: 3rem;
 }
 
 header {
@@ -12,11 +14,13 @@ header {
     margin-top: 50px;
 }
 
+h3 {
+    padding-top: 2rem;
+    font-size: 2rem;
+}
+
 #signInRegisterBox {
     text-align: center;
-    border: 2px solid #304214;
-    border-radius: 10px;
-    padding: 40px;
     margin: 0 auto;
     width: 35%;
     margin-top: 30px;
@@ -24,9 +28,9 @@ header {
 
 .btn-large {
     background-color: #98B768;
-    font-size: 30px;
-    line-height: 100px;
-    height: 100px;
+    font-size: 1rem;
+    height: 3.75rem;
+    width: 10rem;
     margin: 25px;
 }
 
@@ -34,6 +38,19 @@ header {
     background-color: #304214;
 }
 
+#treeimg img {
+    margin: auto;
+    height: 40rem;
+    padding: 0;
+    display: block;
+}
+
+#treeimg {
+    
+    margin: auto;
+    padding: 0;
+}
+
 #content {
-    background-color: black;
+    color: black
 }
