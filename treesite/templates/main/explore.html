@@ -27,11 +27,10 @@
     <div class="list">
         {% for post in posts %}
             <div class="postbox">
-                <h3>{{post.firstname}} {{post.lastname}} just bought {{post.treename}}!</h3>
-                <p>{{post.description}}</p>
-                <p>{{post.postid}}</p>
+                <p class="treebought">{{post.firstname}} {{post.lastname}} just bought a new {{post.treename}}!</p>
+                <p class="caption">{{post.description}}</p>
                 <form>
-                    <button formaction="explore/{{post.postid}}">Delete</button>
+                    <button formaction="explore/{{post.postid}}" class="btn-large delete">Delete</button>
                 </form>
             </div>
         {% endfor %}

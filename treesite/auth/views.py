@@ -72,6 +72,6 @@ def signout(request):
             return HttpResponse("User not logged in.", status=200)
         else:
             logout(request)
-            return HttpResponse("Sign out successful.", status=200)
+            return HttpResponseRedirect("Sign out successful.", status=200)
     else:
         return HttpResponse("Method not allowed.", status=405)

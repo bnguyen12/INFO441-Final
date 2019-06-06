@@ -1,4 +1,25 @@
-<h1>Admin View</h1>
+{% load static from staticfiles %}
+
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link rel="stylesheet" href="{% static 'admin.css' %}">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<div class="navbar">
+    <ul id="nav-mobile">
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/adminview">Admin View</a></li>
+        <li><a href="/profile">My Garden</a></li>
+        <li><a href="/adopt">Adopt</a></li>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/scrape">Load Trees (optional)</a></li>
+        <li><a href="/auth/signout">Sign Out</a></li>
+    </ul>
+</div>
+<h1>Admin Special Controls</h1>
 <div id="container">
     {% csrf_token %}
     <h2>Users</h2>
@@ -10,14 +31,14 @@
                 <p>Email: {{user.email}}</p>
                 <p>Permission: {{user.type}}</p>
                 <form>
-                    <button formaction="admindeleteuser/{{user.userid}}">Delete</button>
+                    <button formaction="admindeleteuser/{{user.userid}}" class="btn-large delete">Delete</button>
                 </form>
             </div>
         {% endfor %}
     </div>
 
+    <h2>Posts</h2>
     <div class="list">
-        <h2>Posts</h2>
         {% for post in posts %}
             <div class="postbox">
                 <p>{{post.firstname}} {{post.lastname}}</p>
@@ -25,7 +46,7 @@
                 <p>Name: {{post.treename}}</p>
                 <p>{{post.description}}</p>
                 <form>
-                    <button formaction="admindeletepost/{{post.postid}}">Delete</button>
+                    <button formaction="admindeletepost/{{post.postid}}" class="btn-large delete">Delete</button>
                 </form>
             </div>
         {% endfor %}
