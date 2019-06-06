@@ -14,11 +14,6 @@ nav {
     background-color: #98B768;
 }
 
-/* html {
-    background-color: rgb(240, 250, 224);
-} */
-
-
 h1 {
     color: #98B768;
     text-align: center;
@@ -35,7 +30,6 @@ div {
 .btn-large {
     background-color: #98B768;
     font-size: 1rem;
-    /* line-height: 100px; */
     height: 3.75rem;
     width: 10rem;
     margin: 25px;
