@@ -54,10 +54,15 @@ def signin(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             pwd = form.cleaned_data["password"]
+<<<<<<< HEAD
             print(pwd)
             print(username)
             user = authenticate(username = username, password = pwd)
             print(user)
+=======
+            user = authenticate(username=username, password=pwd)
+            print(username + ' ' + pwd)
+>>>>>>> 46f433364866e9f00d196578507e97b07b2bcd28
             if user is None:
                 return HttpResponse("Invalid credentials.", status=401)
             else:
