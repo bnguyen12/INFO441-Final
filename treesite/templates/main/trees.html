@@ -22,12 +22,12 @@
                 <li><a href="/profile">My Garden</a></li>
                 <li><a href="/adopt">Adopt</a></li>
                 <li><a href="/cart">Cart</a></li>
-                <li><a href="/scrape">Load Trees (optional)</a></li>
                 <li><a href="/auth/signout">Sign Out</a></li>
                 <li><a href="/main/displayplants">USDA Plants</a></li>
             </ul>
         </div>
         <div id="content">
+            <a class="btn" href="/scrape">Load Trees (optional)</a>
             {% if trees %}
                 <p>{{ trees|length }} trees are looking to get adopted :)</p>
                 <ul class="contentul">
@@ -56,6 +56,13 @@
                 There are no trees to look at
             {% endif %}
         </div>
+        <footer class="page-footer">
+            <div class="footer-copyright">
+                <div class="container">
+                © 2019 Copyright Text
+                </div>
+            </div>
+        </footer>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
