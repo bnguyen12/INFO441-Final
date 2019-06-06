@@ -318,11 +318,17 @@ def cartOperations(request):
         cart = Cart.objects.filter(user_id=request.user).first()
         in_cart = InCart.objects.filter(cart_id=cart.id)
         for item in in_cart:
-            tree = item.trees_id
-            tree.status = 'SOLD'
-            tree.save()
-            item.delete()
-        return HttpResponse('Successfully checked out cart', status=200)
+            try:
+                tree = item.trees_id
+                tree.status = 'SOLD'
+                tree.save()
+                item.delete()
+
+                user_tree = UserTrees(user_id=request.user, trees_id=tree)
+                user_tree.save()
+            except Exception:
+                return HttpResponse('Database error', status=400)
+        return HttpResponseRedirect('/cart')
     else:
         return HttpResponse('Method not allowed.', status=405)
 
