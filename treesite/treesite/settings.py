@@ -140,3 +140,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+# make sure all your static files get loaded in
+STATIC_ROOT = '/code/static'

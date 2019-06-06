@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   treesite:
-    image: treesite
+    image: treesite.azurecr.io/treesite:latest
     build: .
     ports:
-      - 3000:3000
+      - 8002:8002
