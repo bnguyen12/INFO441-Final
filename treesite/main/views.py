@@ -100,7 +100,7 @@ def userProfileView(request):
             trees_owned = []
             for tree in UserTrees.objects.all().filter(user_id=curr_user):
                 tree_obj = tree.trees_id
-                tree_type_obj = TreeType.objects.get(id=tree_obj.tree_type_id)
+                tree_type_obj = tree_obj.tree_type_id
                 curr = {
                     "age" : tree_obj.age, "status" : tree_obj.status,
                     "breed" : tree_type_obj.breed, "description" : tree_type_obj.description
