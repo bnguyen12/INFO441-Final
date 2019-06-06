@@ -1,0 +1,57 @@
+.nav-wrapper {
+    background-color: #98B768;
+    color: white;
+    margin: auto;
+    padding: 0;
+}
+
+.nav-wrapper a {
+    color: white;
+    font-size: 3rem;
+}
+
+.navbar {
+    align-content: center;
+    margin: auto;
+    padding: 0;
+    padding-bottom: 2rem;
+}
+
+.navbar ul a {
+    color: #98B768;
+    font-size: 1.5rem;
+}
+
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 0;
+    align-content: center;
+    text-align: center;
+    align-items: center
+
+}
+
+.navbar ul li {
+    text-align: center;
+    padding: 1rem;
+    align-content: center;
+    align-self: center;
+    margin: auto;
+}
+
+.navbar ul a:hover {
+    text-shadow: 0px 5px 10px; 
+}
+
+nav {
+    background-color: #98B768;
+}
+
+h1 {
+    color: #98B768;
+    text-align: center;
+    font-size: 2rem;
+}

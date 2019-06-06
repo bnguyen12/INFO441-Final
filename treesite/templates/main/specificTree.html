@@ -1,3 +1,25 @@
+{% load static from staticfiles %}
+
+ <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+ <link rel="stylesheet" href="{% static 'specifictree.css' %}">
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+    </div>
+</nav>
+<div class="navbar">
+    <ul id="nav-mobile">
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/adminview">Admin View</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/adopt">Adopt</a></li>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/scrape">Load Trees (optional)</a></li>
+        <li><a href="/auth/signout">Sign Out</a></li>
+    </ul>
+</div>
 {% if tree and location %}
     <h1>Breed: {{ tree.tree_type_id.breed }}</h1>
     <ul>
