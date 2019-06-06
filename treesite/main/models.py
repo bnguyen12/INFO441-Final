@@ -35,7 +35,6 @@ class InCart(models.Model):
     cart_id = models.IntegerField()
     trees_id = models.ForeignKey(Trees, on_delete=models.CASCADE)
 
-
 class Permissions(models.Model):
     user_id = models.ForeignKey(User, on_delete = models.CASCADE)
 

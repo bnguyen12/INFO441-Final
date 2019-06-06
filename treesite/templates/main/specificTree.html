@@ -5,6 +5,10 @@
         <li>Age: {{ tree.age }}</li>
         <li>Status: {{ tree.status }}</li>
         <li>Location: {{location}}</li>
+        <form action="/adopt/{{tree.id}}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Add to Cart">
+        </form>
     </ul>
 {% else %}
     No tree on this page

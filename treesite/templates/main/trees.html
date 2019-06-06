@@ -28,11 +28,17 @@
                     There is a total of {{ trees|length }} records:
                     <ul>
                     {% for tree in trees %}
-                        <li>Breed: {{ tree.tree_type_id.breed }}</li>
-                        <li>Description: {{ tree.tree_type_id.description }}</li>
-                        <li>Age: {{ tree.age }}</li>
-                        <li>Status: {{ tree.status }}</li>
-                        <br />
+                        {% if tree.status == 'AVAILABLE' %}
+                            <li>Breed: {{ tree.tree_type_id.breed }}</li>
+                            <li>Description: {{ tree.tree_type_id.description }}</li>
+                            <li>Age: {{ tree.age }}</li>
+                            <li>Status: {{ tree.status }}</li>
+                            <form action="/adopt/{{tree.id}}" method="get">
+                                {% csrf_token %}
+                                <input type="submit" value="Details">
+                            </form>
+                            <br />
+                        {% endif %}
                     {% endfor %}
                     </ul>
                 {% else %}

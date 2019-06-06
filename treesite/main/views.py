@@ -251,8 +251,20 @@ def specificTree(request, trees_id):
         tree = Trees.objects.get(id=trees_id)
         location = tree.location # TreeAddress.objects.get(trees_id=tree)
         return render(request, 'main/specificTree.html', {'tree' : tree, 'location': location}, status=200)
+    elif request.method == 'POST': 
+        # add tree to cart
+        tree = Trees.objects.get(id=trees_id)
+        tree.status = 'PENDING'
+        tree.save()
+        
+        cart = Cart.objects.filter(user_id=request.user).first()
+        if not cart: #cart doesn't exist for this user yet
+            cart = Cart(user_id=request.user)
+            cart.save()
+        added_cart_item = InCart(cart_id=cart.id, trees_id=tree)
+        added_cart_item.save()
+        return HttpResponseRedirect('/adopt')
     elif request.method == 'PATCH':
-        # check if it's the seller
         tree = Trees.object.get(id=trees_id)
         data = getJSON(request)
         tree.status = data['status']
@@ -302,7 +314,7 @@ def cartOperations(request):
         except Exception:
             return HttpResponse('Database error', status=400)
         return HttpResponse('Cart successfully emptied', status=200)
-    elif request.method == 'POST': # Changes all items added to cart pending
+    elif request.method == 'POST': # Changes all items added to cart sold when checking out
         cart = Cart.objects.filter(user_id=request.user).first()
         in_cart = InCart.objects.filter(cart_id=cart.id)
         for item in in_cart:
@@ -327,7 +339,6 @@ def inCartOperations(request, in_cart_id):
             'breed': tree_in_cart.tree_type_id.breed,
             'age': tree_in_cart.age
         }
-    
         return JsonResponse(json_cart, safe=False, status=201)
     elif request.method == 'PATCH':
         in_cart_item = InCart.objects.get(id=in_cart_id)
@@ -344,7 +355,6 @@ def inCartOperations(request, in_cart_id):
                 'age': new_tree.age
             }
         }
-
         return JsonResponse(in_cart_json, safe=False, status=201)
     elif request.method == 'DELETE':
         in_cart_item = InCart.objects.get(id=in_cart_id)
