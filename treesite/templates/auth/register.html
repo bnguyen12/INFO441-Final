@@ -1,3 +1,4 @@
+{% load materializecss %}
 {% load static from staticfiles %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -11,7 +12,7 @@
 <div id="registerbox">
     <form action="/auth/register" method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form|materializecss }}
         <input type="submit" value="submit" class="btn-large">
     </form>
 </div>
