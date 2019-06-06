@@ -1,0 +1,53 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Adopt-A-Tree</title>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'trees.css' %}">
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+            </div>
+        </nav>
+        <div class="navbar">
+            <ul id="nav-mobile">
+                <li><a href="/explore">Explore</a></li>
+                <li><a href="/adminview">Admin View</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/adopt">Adopt</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/scrape">Load Trees (optional)</a></li>
+                <li><a href="/auth/signout">Sign Out</a></li>
+                <li class="active"><a href="/main/displayplants">USDA Plants</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            {% if plant_names %}
+                <p>
+                    Trees makeup a good portion of the total plants in our world! Here's {{ plant_names|length }} 
+                    plants compiled from the USDA API.
+                </p>
+                <ul class="contentul">
+                {% for plant in plant_names %}
+                    <li class="onetree">
+                        <div class="imgtreediv">
+                            <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
+                        </div>
+                        <p>{{plant}}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                Plants couldn't be loaded.
+            {% endif %}
+        </div>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>

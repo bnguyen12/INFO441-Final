@@ -7,7 +7,7 @@
 
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}"
     </head>
     <body>
         <nav>
@@ -16,7 +16,7 @@
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li><a href="/explore">Explore</a></li>
                     <li><a href="/adminview">Admin View</a></li>
-                    <li><a href="/profile">My Garden</a></li>
+                    <li><a href="/profile">Profile</a></li>
                     <li><a href="/adopt">Adopt</a></li>
                     <li class="active"><a href="/cart">Cart</a></li>
                     <li><a href="/scrape">Load Trees (optional)</a></li>
@@ -24,46 +24,34 @@
                 </ul>
             </div>
         </nav>
-        <div id="content">
-            <h4>Please fill out our form below for any questions or concerns</h4>
+
+        <main>
             <p>
-                Additionally, you can call us at <a href="tel:1-206-555-5555">1(206)555-5555</a>
-                or email us at <a href = "mailto: ok@trees.com">ok@trees.com</a>
+            Our names are Benny Nguyen and Sagar Surana, and we’re working on the agriculture/forestry industry. 
+            In researching about the potential of strategically planting trees, we found that researchers 
+            have used urban vegetation to enhance energy efficiency when it comes to cooling arid climates. 
+            Further research into preventing deforestation found that the many countries have put in efforts 
+            to restore agricultural land. This research cites that the agriculture industry is the “main 
+            driver of deforestation.”
+
+            <br/>
+            <br/>
+
+            Our mission is simple: allow a user to adopt a tree. However, there's more to it than simply
+            owning a new plant In this day and age, people care a lot about their social media presence. 
+            Some buy streets and stars in hopes of gaining likes, reactions, and applauses from their peers
+            because they "own" it. Our inspiration comes from this: humans unintentionally want 
+            to boast about what they’ve done. Adopting a tree from our website will give 
+            the buyer the ability to name it after them. Not only do they get the satisfaction of bragging 
+            about saving the environment, their purchases provide more of an environmental impact than 
+            streets and stars ever could. We understand the earnings that we could receive with some 
+            success of this project. To even further our purpose of aiding the fight against climate 
+            change, we want to be able to use these earnings to help the multiple programs established 
+            all over the world that strive for the same purpose. Lyft’s round up program helped us 
+            understand that we did not need to set up a single organisation we wanted to help with, but 
+            give our users the agency to choose the climate change program of their choice.
             </p>
-            <div class="row">
-                <form class="col s12" action="/adopt" method="get">
-                    <div class="row">
-                        <div class="input-field col s6">
-                        <input id="first_name" type="text" class="validate">
-                        <label for="first_name">First Name</label>
-                        </div>
-                        <div class="input-field col s6">
-                        <input id="last_name" type="text" class="validate">
-                        <label for="last_name">Last Name</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                        <input id="email" type="email" class="validate">
-                        <label for="email">Email</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="input_text" type="text">
-                            <label for="input_text">Title</label>
-                        </div>
-                        </div>
-                        <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="textarea2" class="materialize-textarea"></textarea>
-                            <label for="textarea2">Description</label>
-                        </div>
-                    </div>
-                    <input type="submit" value="submit">
-                </form>
-            </div>
-        </div>
+        </main>
 
         <footer class="page-footer">
             <div class="container">

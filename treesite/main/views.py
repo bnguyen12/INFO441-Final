@@ -479,3 +479,19 @@ def showTreeData(request):
         return JsonResponse(json_trees, safe=False, status=201)
     else:
         return HttpResponse('Method not allowed.', status=405)
+
+@csrf_exempt
+def displayPlantAPI(request):
+    """Displays information on """
+    if request.method == 'GET':
+        page_link = 'https://plantsdb.xyz/search?limit=1000&fields=Common_Name'
+        page_response = requests.get(page_link, timeout=10)
+        json_response = json.loads(page_response.content)
+        data = json_response['data']
+        plant_names = []
+        for plant in data:
+            if plant['Common_Name'] != '':
+                plant_names.append(plant['Common_Name'])
+        return render(request, 'main/displayplants.html', {'plant_names': plant_names}, status=200)
+    else:
+        return HttpResponse('Method not allowed.', status=405)
