@@ -25,7 +25,7 @@ SECRET_KEY = 'l#(l+058bo8fh$05jy5!9em*k7r8#ezei6@mgbzmlnt641=*&m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,9 +77,21 @@ WSGI_APPLICATION = 'treesite.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'treesiteDB',
+        'USER': 'bennyn',
+        'PASSWORD': 'Yourw3ird',
+        'HOST': 'treesite.database.windows.net',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 13 for SQL Server',
+            'MARS_Connection': 'True',
+        }
     }
 }
 
