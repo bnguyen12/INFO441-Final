@@ -218,7 +218,7 @@ def adminDeleteUser(request, user_id):
         if request.user.is_authenticated:
             curr_user_permission = Permissions.objects.get(user_id=request.user)
             if curr_user_permission.perm_type == "Admin":
-                user_obj = User.objects.get(id=post_id)
+                user_obj = User.objects.get(id=user_id)
                 user_obj.delete()
                 return HttpResponseRedirect("/main/adminview")
             else:
