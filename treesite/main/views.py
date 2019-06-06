@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 from django.contrib.auth.models import User
 from bs4 import BeautifulSoup
 
-from .models import TreeType, Trees, TreeAddress, Cart, InCart, UserPosts, Permissions, UserTrees
+from .models import TreeType, Trees, Cart, InCart, UserPosts, Permissions, UserTrees
 from auth.forms import PostForm, ProfileEdit
 import json
 import hashlib
@@ -47,8 +47,6 @@ def exploreView(request):
 def exploreDeletePost(request, post_id):
     """VIEW 1"""
     """EXPLORE view, DELETE request to delete only your own posts"""
-    print(request.method)
-    print(post_id)
     if request.method == "GET":
         if request.user.is_authenticated:
             print(request.user.id)
@@ -251,10 +249,22 @@ def specificTree(request, trees_id):
     
     if request.method == 'GET':
         tree = Trees.objects.get(id=trees_id)
-        location = TreeAddress.objects.get(trees_id=tree)
+        location = tree.location # TreeAddress.objects.get(trees_id=tree)
         return render(request, 'main/specificTree.html', {'tree' : tree, 'location': location}, status=200)
+    elif request.method == 'POST': 
+        # add tree to cart
+        tree = Trees.objects.get(id=trees_id)
+        tree.status = 'PENDING'
+        tree.save()
+        
+        cart = Cart.objects.filter(user_id=request.user).first()
+        if not cart: #cart doesn't exist for this user yet
+            cart = Cart(user_id=request.user)
+            cart.save()
+        added_cart_item = InCart(cart_id=cart.id, trees_id=tree)
+        added_cart_item.save()
+        return HttpResponseRedirect('/adopt')
     elif request.method == 'PATCH':
-        # check if it's the seller
         tree = Trees.object.get(id=trees_id)
         data = getJSON(request)
         tree.status = data['status']
@@ -283,29 +293,35 @@ def specificTree(request, trees_id):
         return HttpResponse('Tree successfully deleted', status=200)
 
 @csrf_exempt
-def cartOperations(request, cart_id):
+def cartOperations(request):
     """Shows, updates, or delete whole cart"""
     if request.user.is_authenticated is False:
         return HttpResponse('User unauthorized.', status=401)
-    
     if request.method == 'GET': # Displays all cart items on a webpage
-        cart_items = InCart.objects.filter(cart_id=cart_id)
+        cart = Cart.objects.filter(user_id=request.user).first()
         all_items = []
-        for item in cart_items:
-            all_items.append(item)
+        if cart: # if there's an existing cart
+            in_cart = InCart.objects.filter(cart_id=cart.id)
+            if in_cart: # if there's item in cart
+                for item in in_cart:
+                    all_items.append(item)
+        else: # make a cart for the user if not already made
+            Cart(user_id=request.user).save()
         return render(request, 'main/cart.html', { 'all_items' : all_items }, status=200)
     elif request.method == 'DELETE':
-        cart = Cart.objects.get(id=cart_id)
-        cart.delete()
-        return HttpResponse('Cart successfully emptied')
-    elif request.method == 'POST': # Changes all items added to cart pending
-        cart = Cart.objects.get(id=cart_id)
-        in_cart_items = InCart.objects.filter(cart_id=cart)
-        for item in in_cart_items:
-            tree = in_cart_items.trees_id
-            tree.status = 'PENDING'
+        try:
+            Cart.objects.filter(user_id=request.user).first().delete
+        except Exception:
+            return HttpResponse('Database error', status=400)
+        return HttpResponse('Cart successfully emptied', status=200)
+    elif request.method == 'POST': # Changes all items added to cart sold when checking out
+        cart = Cart.objects.filter(user_id=request.user).first()
+        in_cart = InCart.objects.filter(cart_id=cart.id)
+        for item in in_cart:
+            tree = in_cart.trees_id
+            tree.status = 'SOLD'
             tree.save()
-        return HttpResponse('Successfully  cart', status=200)
+        return HttpResponse('Successfully checked out cart', status=200)
     else:
         return HttpResponse('Method not allowed.', status=405)
 
@@ -323,7 +339,6 @@ def inCartOperations(request, in_cart_id):
             'breed': tree_in_cart.tree_type_id.breed,
             'age': tree_in_cart.age
         }
-    
         return JsonResponse(json_cart, safe=False, status=201)
     elif request.method == 'PATCH':
         in_cart_item = InCart.objects.get(id=in_cart_id)
@@ -340,7 +355,6 @@ def inCartOperations(request, in_cart_id):
                 'age': new_tree.age
             }
         }
-
         return JsonResponse(in_cart_json, safe=False, status=201)
     elif request.method == 'DELETE':
         in_cart_item = InCart.objects.get(id=in_cart_id)
@@ -359,7 +373,7 @@ def getJSON(request):
 
 @csrf_exempt
 def scrapeData(request):
-    """Gets tree data from Wikipedia and puts it in TreeType, Trees, and TreeAddress"""
+    """Gets tree data from Wikipedia and puts it in TreeType and Trees"""
     if request.method == 'GET':
         if not TreeType.objects.filter(breed='Lost Tree').first(): # check if we've scraped before
             page_link = 'https://en.wikipedia.org/wiki/List_of_individual_trees'
@@ -393,8 +407,19 @@ def scrapeData(request):
                 desc = tree_names[name]['description']
                 location = tree_names[name]['location']
                 age = tree_names[name]['age']
-                # new_tree_type = TreeType(breed=name, description=desc)
-                # new_tree_type.save()
+                try:
+                    new_tree_type = TreeType(breed=name, description=desc)
+                    new_tree_type.save()
+                    new_tree = Trees(
+                        tree_type_id=new_tree_type,
+                        age=age,
+                        location=location,
+                        status='AVAILABLE'
+                    )
+                    print(new_tree)
+                    new_tree.save()
+                except Exception:
+                    return HttpResponse('Database error', status=400)
 
             return HttpResponseRedirect("/main/adopt")
         else:

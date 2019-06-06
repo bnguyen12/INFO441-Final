@@ -18,8 +18,9 @@
                     <li><a href="/adminview">Admin View</a></li>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/adopt">Adopt</a></li>
-                    <li><a href="/cart/1">Cart</a></li>
-                    <li><a href="/scrape">Scrape</a></li>
+                    <li><a href="/cart">Cart</a></li>
+                    <li><a href="/scrape">Load Trees (optional)</a></li>
+                    <li><a href="/auth/signout">Sign Out</a></li>
                 </ul>
             </div>
             <div id="content">
@@ -27,11 +28,17 @@
                     There is a total of {{ trees|length }} records:
                     <ul>
                     {% for tree in trees %}
-                        <li>Breed: {{ tree.tree_type_id.breed }}</li>
-                        <li>Description: {{ tree.tree_type_id.description }}</li>
-                        <li>Age: {{ tree.age }}</li>
-                        <li>Status: {{ tree.status }}</li>
-                        <br />
+                        {% if tree.status == 'AVAILABLE' %}
+                            <li>Breed: {{ tree.tree_type_id.breed }}</li>
+                            <li>Description: {{ tree.tree_type_id.description }}</li>
+                            <li>Age: {{ tree.age }}</li>
+                            <li>Status: {{ tree.status }}</li>
+                            <form action="/adopt/{{tree.id}}" method="get">
+                                {% csrf_token %}
+                                <input type="submit" value="Details">
+                            </form>
+                            <br />
+                        {% endif %}
                     {% endfor %}
                     </ul>
                 {% else %}
