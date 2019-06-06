@@ -1,6 +1,8 @@
 .nav-wrapper {
     background-color: #98B768;
     color: white;
+    margin: auto;
+    padding: 0;
 }
 
 .nav-wrapper a {
@@ -8,26 +10,26 @@
     font-size: 3rem;
 }
 
+nav {
+    background-color: #98B768;
+}
+
 /* html {
     background-color: rgb(240, 250, 224);
 } */
 
-header {
-    color: #304214;
-    text-align: center;
-    margin-top: 50px;
-}
 
-h3 {
-    padding-top: 2rem;
+h1 {
+    color: #98B768;
+    text-align: center;
     font-size: 2rem;
 }
 
-#signInRegisterBox {
+div {
+    padding-top: 4rem;
+    width: 80%;
     text-align: center;
-    margin: 0 auto;
-    width: 35%;
-    margin-top: 30px;
+    margin: auto;
 }
 
 .btn-large {
@@ -43,20 +45,24 @@ h3 {
     background-color: #304214;
 }
 
-#treeimg img {
-    margin: auto;
-    height: 40rem;
-    padding: 0;
-    display: block;
+
+li label {
+    width: 100%;
+    display: inline;
 }
 
-#treeimg {
-    
-    margin: auto;
+li {
+    margin: 0;
     padding: 0;
 }
 
-#content {
-    color: black
-    /* background-color: black; */
+[type="radio"] {
+    margin: 2rem;
+    padding: 0;
+}
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: absolute;
+    opacity: 1; 
+    pointer-events: none;
 }
