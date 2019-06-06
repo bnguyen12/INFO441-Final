@@ -1,0 +1,93 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Adopt-A-Tree</title>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="{% static 'styles.css' %}"
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                    <li><a href="/explore">Explore</a></li>
+                    <li><a href="/adminview">Admin View</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/adopt">Adopt</a></li>
+                    <li class="active"><a href="/cart">Cart</a></li>
+                    <li><a href="/scrape">Load Trees (optional)</a></li>
+                    <li><a href="/auth/signout">Sign Out</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="content">
+            <h4>Please fill out our form below for any questions or concerns</h4>
+            <p>
+                Additionally, you can call us at <a href="tel:1-206-555-5555">1(206)555-5555</a>
+                or email us at <a href = "mailto: ok@trees.com">ok@trees.com</a>
+            </p>
+            <div class="row">
+                <form class="col s12" action="/adopt" method="get">
+                    <div class="row">
+                        <div class="input-field col s6">
+                        <input id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="input_text" type="text">
+                            <label for="input_text">Title</label>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea2" class="materialize-textarea"></textarea>
+                            <label for="textarea2">Description</label>
+                        </div>
+                    </div>
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+        </div>
+
+        <footer class="page-footer">
+            <div class="container">
+                <div class="row">
+                <div class="col l6 s12">
+                    <h5>Links</h5>
+                    <p class="grey-text text-lighten-4">Helpful links about this company.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5>Learn More</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="main/contactus.html">Contact Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="main/aboutus.html">About Us</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                © 2019 Copyright Text
+                </div>
+            </div>
+        </footer>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>
