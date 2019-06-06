@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 from . import views
 
 app_name = 'main'
@@ -17,5 +18,6 @@ urlpatterns = [
     path('adopt/<int:trees_id>', views.specificTree, name='specificTree'),
     path('cart', views.cartOperations, name='useCart'),
     path('cart/items/<int:in_cart_id>', views.inCartOperations, name='inCartOperations'),
-    path('scrape', views.scrapeData, name='scrape')
+    path('scrape', views.scrapeData, name='scrape'),
+    path('contactus', TemplateView.as_view(template_name='main/contactus.html'), name='contactus')
 ]

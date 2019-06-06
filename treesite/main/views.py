@@ -477,3 +477,5 @@ def showTreeData(request):
             except Exception:
                 return HttpResponse('Parsing error', status=400)
         return JsonResponse(json_trees, safe=False, status=201)
+    else:
+        return HttpResponse('Method not allowed.', status=405)
