@@ -7,45 +7,54 @@
 
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="{% static 'styles.css' %}"
+        <link rel="stylesheet" href="{% static 'trees.css' %}">
     </head>
     <body>
         <nav>
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="/explore">Explore</a></li>
-                    <li><a href="/adminview">Admin View</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/adopt">Adopt</a></li>
-                    <li><a href="/cart">Cart</a></li>
-                    <li><a href="/scrape">Load Trees (optional)</a></li>
-                    <li><a href="/auth/signout">Sign Out</a></li>
-                </ul>
-            </div>
-            <div id="content">
-                {% if trees %}
-                    There is a total of {{ trees|length }} records:
-                    <ul>
-                    {% for tree in trees %}
-                        {% if tree.status == 'AVAILABLE' %}
-                            <li>Breed: {{ tree.tree_type_id.breed }}</li>
-                            <li>Description: {{ tree.tree_type_id.description }}</li>
-                            <li>Age: {{ tree.age }}</li>
-                            <li>Status: {{ tree.status }}</li>
-                            <form action="/adopt/{{tree.id}}" method="get">
-                                {% csrf_token %}
-                                <input type="submit" value="Details">
-                            </form>
-                            <br />
-                        {% endif %}
-                    {% endfor %}
-                    </ul>
-                {% else %}
-                    There are no trees to look at
-                {% endif %}
             </div>
         </nav>
+        <div class="navbar">
+            <ul id="nav-mobile">
+                <li><a href="/explore">Explore</a></li>
+                <li><a href="/adminview">Admin View</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/adopt">Adopt</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/scrape">Load Trees (optional)</a></li>
+                <li><a href="/auth/signout">Sign Out</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            {% if trees %}
+                <p>{{ trees|length }} trees are looking to get adopted :)</p>
+                <ul class="contentul">
+                {% for tree in trees %}
+                    {% if tree.status == 'AVAILABLE' %}
+                        <li class="onetree">
+                            <div class="imgtreediv">
+                                <img class="imgtree" src="/static/img/tree.png" alt="tree"/>
+                            </div>
+                            <ul class="singletreedetails">
+                                <li>Breed: <p>{{ tree.tree_type_id.breed }}</p> </li>
+                                <!-- <li>Description: <p> {{ tree.tree_type_id.description }}</p> </li> -->
+                                <li>Age: <p>{{ tree.age }}</p> </li>
+                                <li>Status: <p>{{ tree.status }}</p></li>
+                                <form action="/adopt/{{tree.id}}" method="get">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn-large" value="Details">
+                                </form>
+                                <br />
+                            </ul>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% else %}
+                There are no trees to look at
+            {% endif %}
+        </div>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>

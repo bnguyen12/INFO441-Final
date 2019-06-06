@@ -33,6 +33,7 @@ def register(request):
                     perm_type=form.cleaned_data["permission_type"]
                 )
                 print(user)
+                print(user.password)
                 newPermissionObject.save()
                 return HttpResponseRedirect("signin")
             else:
@@ -53,8 +54,7 @@ def signin(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             pwd = form.cleaned_data["password"]
-            user = authenticate(username=username, password=pwd)
-            print(username + ' ' + pwd)
+            user = authenticate(username = username, password = pwd)
             if user is None:
                 return HttpResponse("Invalid credentials.", status=401)
             else:

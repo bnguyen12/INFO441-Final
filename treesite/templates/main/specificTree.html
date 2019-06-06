@@ -7,7 +7,7 @@
         <li>Location: {{location}}</li>
         <form action="/adopt/{{tree.id}}" method="post">
             {% csrf_token %}
-            <input type="submit" value="Add to Cart">
+            <input type="submit" class="btn-large" value="Add to Cart">
         </form>
     </ul>
 {% else %}
