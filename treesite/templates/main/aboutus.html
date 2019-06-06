@@ -7,25 +7,27 @@
 
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <link rel="stylesheet" href="{% static 'aboutus.css' %}">
     </head>
     <body>
         <nav>
             <div class="nav-wrapper">
                 <a href="#!" class="brand-logo center">Adopt-A-Tree</a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="/explore">Explore</a></li>
-                    <li><a href="/adminview">Admin View</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/adopt">Adopt</a></li>
-                    <li class="active"><a href="/cart">Cart</a></li>
-                    <li><a href="/scrape">Load Trees (optional)</a></li>
-                    <li><a href="/main/displayplants">USDA Plants</a></li>
-                    <li><a href="/auth/signout">Sign Out</a></li>
-                </ul>
             </div>
         </nav>
-
+        <div class="navbar">
+            <ul id="nav-mobile">
+                <li><a href="/explore">Explore</a></li>
+                <li><a href="/adminview">Admin View</a></li>
+                <li><a href="/profile">My Garden</a></li>
+                <li><a href="/adopt">Adopt</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/main/displayplants">USDA Plants</a></li>
+                <li><a href="/main/contactus">Contact Us</a></li>
+                <li><a href="/main/aboutus">About Us</a></li>
+                <li><a href="/auth/signout">Sign Out</a></li>
+            </ul>
+        </div>
         <main>
             <p>
             Our names are Benny Nguyen and Sagar Surana, and we’re working on the agriculture/forestry industry. 
@@ -53,29 +55,6 @@
             give our users the agency to choose the climate change program of their choice.
             </p>
         </main>
-
-        <footer class="page-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5>Links</h5>
-                        <p class="grey-text text-lighten-4">Helpful links about this company.</p>
-                    </div>
-                    <div class="col l4 offset-l2 s12">
-                        <h5>Learn More</h5>
-                        <ul>
-                            <li><a class="grey-text text-lighten-3" href="main/contactus.html">Contact Us</a></li>
-                            <li><a class="grey-text text-lighten-3" href="main/aboutus.html">About Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                © 2019 Copyright Text
-                </div>
-            </div>
-        </footer>
         <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>

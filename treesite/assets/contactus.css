@@ -1,0 +1,108 @@
+.nav-wrapper {
+    background-color: #98B768;
+    color: white;
+    margin: auto;
+    padding: 0;
+}
+
+.nav-wrapper a {
+    color: white;
+    font-size: 3rem;
+}
+
+.navbar {
+    align-content: center;
+    margin: auto;
+    padding: 0;
+    padding-bottom: 2rem;
+}
+
+.navbar ul a {
+    color: #98B768;
+    font-size: 1.5rem;
+}
+
+.navbar ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 0;
+    align-content: center;
+    text-align: center;
+    align-items: center
+
+}
+
+.navbar ul li {
+    text-align: center;
+    padding: 1rem;
+    align-content: center;
+    align-self: center;
+    margin: auto;
+}
+
+.navbar ul a:hover {
+    text-shadow: 0px 5px 10px; 
+}
+
+nav {
+    background-color: #98B768;
+}
+
+.btn-large {
+    background-color: #98B768;
+    font-size: 1rem;
+    text-align: center;
+    height: 2rem;
+    width: 10rem;
+    margin: auto;
+    padding: 0;
+    vertical-align: middle;
+    line-height: 6px;
+    align-content: center;
+    align-self: center;
+    display: block;
+}
+
+.btn-large:hover {
+    background-color: #304214;
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 0;
+    color: #304214;
+    text-align: center;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    font-weight: bold;
+}
+
+p {
+    color: #304214;
+    text-align: center;
+}
+
+p a {
+    color: #304214;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.row {
+    width: 70%;
+    text-align: center;
+    color: black;
+    margin: auto;
+    padding: 0;
+}
+
+
+.row form {
+    align-self: center;
+    text-align: center;
+    margin: auto;
+    display: block;
+    padding: 0;
+}
