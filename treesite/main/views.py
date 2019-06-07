@@ -486,7 +486,7 @@ def displayPlantAPI(request):
     if request.method == 'GET':
         page_link = 'https://plantsdb.xyz/search?limit=1000&fields=Common_Name'
         page_response = requests.get(page_link, timeout=10)
-        json_response = json.loads(page_response.content)
+        json_response = page_response.json()
         data = json_response['data']
         plant_names = []
         for plant in data:
