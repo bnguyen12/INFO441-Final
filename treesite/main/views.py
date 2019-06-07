@@ -240,6 +240,8 @@ def adopt(request):
         for tree in Trees.objects.all():
             trees.append(tree)
         return render(request, 'main/trees.html', {'trees' : trees}, status=200)
+    else:
+        return HttpResponse('Method not allowed.', status=405)
 
 @csrf_exempt
 def specificTree(request, trees_id):
@@ -365,7 +367,10 @@ def inCartOperations(request, in_cart_id):
         return JsonResponse(in_cart_json, safe=False, status=201)
     elif request.method == 'DELETE':
         in_cart_item = InCart.objects.get(id=in_cart_id)
-        in_cart_item.delete()
+        try:
+            in_cart_item.delete()
+        except Exception:
+            return HttpResponse('Database error', status=400)
         return HttpResponse('Successfully removed item from cart', status=200)
 
 def getJSON(request):
