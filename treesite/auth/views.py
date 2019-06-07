@@ -63,7 +63,7 @@ def signin(request):
         else:
             return HttpResponse("Bad login form.", status=400)
     else:
-        return HttpResponse("Method not allowed on auth/register.", status=405)
+        return HttpResponse("Method not allowed on auth/signin.", status=405)
 
 def signout(request):
     """ lets users signout of their accounts """

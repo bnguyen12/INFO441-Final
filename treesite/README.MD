@@ -232,3 +232,43 @@
         * Returns 200
     * Else:
         * Returns 405
+
+
+# Endpoints for auth/
+
+## /register
+* Let's new users register by displaying a form
+* Methods:
+    * GET:
+        * Shows a form to type in user information and authentication details with status 200
+    * POST:
+        * Details entered by users are posted to the database and 
+        user is created under appropriate permissions
+        * If form data is invalid, throws error with status 400
+        * If password and confirmed password do not match, throws error with status 400 
+    * Else:
+        * Throws error with status 405
+
+## /signin
+* Let's existing users enter the website and log in by displaying a form
+* Methods:
+    * GET:
+        * Shows a form with fields to authenticate existing users
+    * POST:
+        * Credentials entered by users are authenticated and 
+        user is logged in and redirected to home page
+        * If form data is invalid, throws error with status 400
+        * If sign in credentials do not match with an existing user,
+        throws error with status 401 
+    * Else:
+        * Throws error with status 405
+
+
+## /signout
+* Let's logged in users sign out
+* Methods:
+    * GET:
+        * Logs user out with status code 200
+        * If no user is logged in, throws error with status 200
+    * Else:
+        * Throws error with status 405
